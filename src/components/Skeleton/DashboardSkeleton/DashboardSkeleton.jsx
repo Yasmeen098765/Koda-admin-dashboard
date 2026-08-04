@@ -10,7 +10,7 @@ const CardsSkeleton = ({ baseColor, highlightColor }) => {
       {cards.map((_, index) => (
         <div
           key={index}
-          className="card bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl shadow-sm"
+          className="p-6 bg-white border shadow-sm card dark:bg-slate-900 border-slate-200 dark:border-slate-800 rounded-2xl"
         >
           <div className="card-icon skeleton-card-icon-wrapper">
             <Skeleton
@@ -29,7 +29,7 @@ const CardsSkeleton = ({ baseColor, highlightColor }) => {
             <Skeleton width={120} height={28} />
           </h2>
 
-          <p className="dash-card-caption mt-2">
+          <p className="mt-2 dash-card-caption">
             <Skeleton width={80} height={12} />
           </p>
         </div>
@@ -59,8 +59,8 @@ const OrderStatusSkeleton = ({ baseColor, highlightColor }) => {
   ];
 
   const content = (
-    <div className="rounded-3xl border border-slate-200 bg-white/90 p-6 shadow-xl min-h-[520px] dark:border-slate-800 dark:bg-slate-900/90">
-      <div className="flex justify-between items-center mb-6">
+    <div className="rounded-3xl border border-slate-200 bg-white/90 p-6 shadow-xl min-h-[520px] dark:border-slate-800 dark:bg-slate-900">
+      <div className="flex items-center justify-between mb-6">
         <div>
           <Skeleton width={150} height={14} className="mb-2" />
           <Skeleton width={200} height={24} />
@@ -97,13 +97,13 @@ const BestSellerSkeleton = ({ baseColor, highlightColor }) => {
   const products = Array(4).fill(null);
 
   const content = (
-    <div className="best-seller bg-white/90 rounded-3xl border border-slate-200 p-6 shadow-xl dark:border-slate-800 dark:bg-slate-900/90">
+    <div className="p-6 border shadow-xl best-seller bg-white/90 rounded-3xl border-slate-200 dark:border-slate-800 dark:bg-slate-900">
       <Skeleton width={120} height={20} className="mb-6" />
 
       {products.map((_, index) => (
         <div
           key={index}
-          className="product-item bg-white/90 rounded-2xl border border-slate-200 p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/90 mb-3 last:mb-0"
+          className="p-4 mb-3 border shadow-sm product-item bg-white/90 rounded-2xl border-slate-200 dark:border-slate-800 dark:bg-slate-900/90 last:mb-0"
         >
           <div className="flex items-center gap-4">
             <Skeleton width={60} height={60} borderRadius={12} />
@@ -132,8 +132,8 @@ const RecentOrdersSkeleton = ({ baseColor, highlightColor }) => {
   const orders = Array(5).fill(null);
 
   const content = (
-    <div className="rounded-3xl border border-slate-200 bg-white/90 p-6 shadow-xl dark:border-slate-800 dark:bg-slate-900/90">
-      <div className="flex justify-between items-center mb-4">
+    <div className="p-6 mt-8 border shadow-xl rounded-3xl border-slate-200 bg-white/90 dark:border-slate-800 dark:bg-slate-900">
+      <div className="flex items-center justify-between mb-4">
         <div>
           <Skeleton width={150} height={14} className="mb-2" />
           <Skeleton width={200} height={24} />
@@ -145,7 +145,7 @@ const RecentOrdersSkeleton = ({ baseColor, highlightColor }) => {
         {orders.map((_, index) => (
           <div
             key={index}
-            className="flex items-center justify-between rounded-3xl border border-slate-100 bg-slate-50 dark:border-slate-800 dark:bg-slate-950 px-6 py-5"
+            className="flex items-center justify-between px-6 py-5 border rounded-3xl border-slate-100 bg-slate-50 dark:border-slate-800 dark:bg-slate-900"
           >
             <div className="flex-1">
               <Skeleton width={160} height={20} className="mb-2" />
@@ -174,8 +174,8 @@ const RecentOrdersSkeleton = ({ baseColor, highlightColor }) => {
 
 const DashboardSkeleton = ({ baseColor, highlightColor }) => {
   const content = (
-    <section className="dashboard bg-slate-100  dark:bg-slate-900">
-      <div className="dashboard-header bg-slate-50  dark:bg-slate-900">
+    <section className="p-4 dashboard bg-slate-100 dark:bg-slate-900 lg:p-8">
+      <div className="dashboard-header bg-slate-50 dark:bg-slate-900">
         <Skeleton width={150} height={14} className="mb-2" />
         <Skeleton width={300} height={28} className="mb-2" />
         <Skeleton width={400} height={20} />

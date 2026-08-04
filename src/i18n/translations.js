@@ -23,7 +23,8 @@ const translations = {
     // Dashboard Home
     "dashboard.adminOverview": "Admin Overview",
     "dashboard.realtimeHealth": "Real-time commerce health",
-    "dashboard.healthDescription": "Monitor your storefront with AI-style clarity and live API metrics.",
+    "dashboard.healthDescription":
+      "Monitor your storefront with AI-style clarity and live API metrics.",
     "dashboard.totalOrders": "Total Orders",
     "dashboard.allOrdersReceived": "All orders received",
     "dashboard.pendingOrders": "Pending Orders",
@@ -90,13 +91,15 @@ const translations = {
     "products.noDescription": "No description available.",
     "products.deleteConfirm": "Are you sure you want to delete this product?",
     "products.deleteSuccess": "Product deleted successfully",
-    "products.deleteFail": "Failed to delete product. Please check your permissions.",
+    "products.deleteFail":
+      "Failed to delete product. Please check your permissions.",
 
     // Add Product page
     "addProduct.backToProducts": "Back to products",
     "addProduct.createProduct": "Create Product",
     "addProduct.launchTitle": "Launch a polished product entry",
-    "addProduct.launchDesc": "Add products with validation, image previews, multi-upload support, and smooth UX.",
+    "addProduct.launchDesc":
+      "Add products with validation, image previews, multi-upload support, and smooth UX.",
     "addProduct.ready": "Ready",
     "addProduct.readyDesc": "Create, validate, and save with one click.",
     "addProduct.gallery": "Gallery *",
@@ -106,7 +109,8 @@ const translations = {
     "addProduct.uploadFormats": "PNG, JPG, WEBP • multiple files supported",
     "addProduct.left": "left",
     "addProduct.uploadTips": "Upload Tips",
-    "addProduct.uploadTipsDesc": "Use high-quality images (preferably 1:1 ratio) for the best display on the store. The first image will be used as the thumbnail.",
+    "addProduct.uploadTipsDesc":
+      "Use high-quality images (preferably 1:1 ratio) for the best display on the store. The first image will be used as the thumbnail.",
     "addProduct.productName": "Product Name *",
     "addProduct.shortDesc": "Short Description *",
     "addProduct.description": "Description *",
@@ -131,7 +135,8 @@ const translations = {
     "editProduct.backToProducts": "Back to products",
     "editProduct.editProduct": "Edit Product",
     "editProduct.updateTitle": "Update product details",
-    "editProduct.updateDesc": "Edit product information, manage gallery, and adjust availability seamlessly.",
+    "editProduct.updateDesc":
+      "Edit product information, manage gallery, and adjust availability seamlessly.",
     "editProduct.liveUpdate": "Live Update",
     "editProduct.liveUpdateDesc": "Changes will be visible immediately.",
     "editProduct.new": "New",
@@ -276,7 +281,8 @@ const translations = {
     // Carts page
     "carts.title": "CARTS",
     "carts.overview": "Cart overview",
-    "carts.description": "All active carts returned from the API are rendered here with their latest item details.",
+    "carts.description":
+      "All active carts returned from the API are rendered here with their latest item details.",
     "carts.totalCarts": "Total Carts",
     "carts.totalItems": "Total Items",
     "carts.totalValue": "Total Value",
@@ -288,7 +294,8 @@ const translations = {
     // Settings page
     "settings.title": "SETTINGS",
     "settings.heading": "Preferences and integrations",
-    "settings.description": "Theme mode, API credentials, and dashboard preferences are managed here.",
+    "settings.description":
+      "Theme mode, API credentials, and dashboard preferences are managed here.",
     "settings.appearance": "Appearance",
     "settings.appearanceDesc": "Customize your dashboard theme",
     "settings.light": "Light",
@@ -317,7 +324,8 @@ const translations = {
     "login.error": "Login credentials are incorrect. Please try again.",
     "login.title": "Koda Commerce",
     "login.heading": "Manage Your Store Like a Pro",
-    "login.description": "Control products, orders, users, carts and analytics from a modern dashboard experience.",
+    "login.description":
+      "Control products, orders, users, carts and analytics from a modern dashboard experience.",
     "login.feature1": "Product Management",
     "login.feature2": "Order Tracking",
     "login.feature3": "Customer Insights",
@@ -373,7 +381,8 @@ const translations = {
     // Dashboard Home
     "dashboard.adminOverview": "نظرة عامة للمسؤول",
     "dashboard.realtimeHealth": "صحة التجارة في الوقت الفعلي",
-    "dashboard.healthDescription": "راقب واجهة متجرك بوضوح وبمقاييس API المباشرة.",
+    "dashboard.healthDescription":
+      "راقب واجهة متجرك بوضوح وبمقاييس API المباشرة.",
     "dashboard.totalOrders": "إجمالي الطلبات",
     "dashboard.allOrdersReceived": "جميع الطلبات المستلمة",
     "dashboard.pendingOrders": "الطلبات المعلقة",
@@ -446,7 +455,8 @@ const translations = {
     "addProduct.backToProducts": "العودة للمنتجات",
     "addProduct.createProduct": "إنشاء منتج",
     "addProduct.launchTitle": "أطلق منتجاً جديداً",
-    "addProduct.launchDesc": "أضف منتجات مع التحقق، معاينة الصور، دعم الرفع المتعدد وتجربة سلسة.",
+    "addProduct.launchDesc":
+      "أضف منتجات مع التحقق، معاينة الصور، دعم الرفع المتعدد وتجربة سلسة.",
     "addProduct.ready": "جاهز",
     "addProduct.readyDesc": "أنشئ، تحقق، واحفظ بضغطة واحدة.",
     "addProduct.gallery": "المعرض *",
@@ -456,7 +466,8 @@ const translations = {
     "addProduct.uploadFormats": "PNG, JPG, WEBP • يدعم ملفات متعددة",
     "addProduct.left": "متبقي",
     "addProduct.uploadTips": "نصائح الرفع",
-    "addProduct.uploadTipsDesc": "استخدم صور عالية الجودة (يفضل نسبة 1:1) لأفضل عرض في المتجر. الصورة الأولى ستكون الصورة المصغرة.",
+    "addProduct.uploadTipsDesc":
+      "استخدم صور عالية الجودة (يفضل نسبة 1:1) لأفضل عرض في المتجر. الصورة الأولى ستكون الصورة المصغرة.",
     "addProduct.productName": "اسم المنتج *",
     "addProduct.shortDesc": "وصف قصير *",
     "addProduct.description": "الوصف *",
@@ -481,7 +492,8 @@ const translations = {
     "editProduct.backToProducts": "العودة للمنتجات",
     "editProduct.editProduct": "تعديل المنتج",
     "editProduct.updateTitle": "تحديث تفاصيل المنتج",
-    "editProduct.updateDesc": "عدّل معلومات المنتج، أدِر المعرض، واضبط التوفر بسلاسة.",
+    "editProduct.updateDesc":
+      "عدّل معلومات المنتج، أدِر المعرض، واضبط التوفر بسلاسة.",
     "editProduct.liveUpdate": "تحديث مباشر",
     "editProduct.liveUpdateDesc": "التغييرات ستكون مرئية فوراً.",
     "editProduct.new": "جديد",
@@ -562,13 +574,15 @@ const translations = {
     "users.password": "كلمة المرور",
     "users.minChars": "6 أحرف على الأقل",
     "users.requiredFields": "حقول مطلوبة",
-    "users.requiredFieldsError": "اسم المستخدم، البريد الإلكتروني، وكلمة المرور مطلوبة.",
+    "users.requiredFieldsError":
+      "اسم المستخدم، البريد الإلكتروني، وكلمة المرور مطلوبة.",
     "users.clear": "مسح",
     "users.createUser": "إنشاء مستخدم",
     "users.createUserBtn": "إنشاء مستخدم",
     "users.yes": "نعم",
     "users.no": "لا",
-    "users.reloginError": "يرجى تسجيل الدخول مرة أخرى للوصول إلى قائمة المستخدمين.",
+    "users.reloginError":
+      "يرجى تسجيل الدخول مرة أخرى للوصول إلى قائمة المستخدمين.",
     "users.loadError": "غير قادر على تحميل المستخدمين من الـ API حالياً.",
     "users.createSuccess": "تم إنشاء المستخدم بنجاح.",
     "users.createFail": "فشل إنشاء المستخدم.",
@@ -626,19 +640,22 @@ const translations = {
     // Carts page
     "carts.title": "سلات التسوق",
     "carts.overview": "نظرة عامة على السلات",
-    "carts.description": "جميع سلات التسوق النشطة المسترجعة من الـ API معروضة هنا مع آخر تفاصيل العناصر.",
+    "carts.description":
+      "جميع سلات التسوق النشطة المسترجعة من الـ API معروضة هنا مع آخر تفاصيل العناصر.",
     "carts.totalCarts": "إجمالي السلات",
     "carts.totalItems": "إجمالي العناصر",
     "carts.totalValue": "القيمة الإجمالية",
     "carts.uniqueUsers": "المستخدمين المميزين",
     "carts.noCarts": "لا توجد سلات تسوق",
-    "carts.noCartsDesc": "لا توجد سلات تسوق نشطة مسترجعة من الـ API في الوقت الحالي.",
+    "carts.noCartsDesc":
+      "لا توجد سلات تسوق نشطة مسترجعة من الـ API في الوقت الحالي.",
     "carts.empty": "لا توجد سلات مسترجعة من الـ API.",
 
     // Settings page
     "settings.title": "الإعدادات",
     "settings.heading": "التفضيلات والتكاملات",
-    "settings.description": "وضع السمة، بيانات API، وتفضيلات لوحة التحكم تُدار هنا.",
+    "settings.description":
+      "وضع السمة، بيانات API، وتفضيلات لوحة التحكم تُدار هنا.",
     "settings.appearance": "المظهر",
     "settings.appearanceDesc": "تخصيص سمة لوحة التحكم الخاصة بك",
     "settings.light": "فاتح",
@@ -667,7 +684,8 @@ const translations = {
     "login.error": "بيانات الدخول غير صحيحة. يرجى المحاولة مرة أخرى.",
     "login.title": "كودا كوميرس",
     "login.heading": "أدر متجرك كالمحترفين",
-    "login.description": "تحكم في المنتجات، الطلبات، المستخدمين، السلات، والتحليلات من خلال تجربة لوحة تحكم حديثة.",
+    "login.description":
+      "تحكم في المنتجات، الطلبات، المستخدمين، السلات، والتحليلات من خلال تجربة لوحة تحكم حديثة.",
     "login.feature1": "إدارة المنتجات",
     "login.feature2": "تتبع الطلبات",
     "login.feature3": "رؤى العملاء",

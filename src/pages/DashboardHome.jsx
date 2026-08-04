@@ -195,7 +195,7 @@ export default function DashboardHome() {
 
   if (error) {
     return (
-      <div className="p-6 md:p-8 text-center text-red-500 bg-red-50 dark:bg-red-950/30 rounded-xl m-4 md:m-6">
+      <div className="p-6 m-4 text-center text-red-500 md:p-8 bg-red-50 dark:bg-red-950/30 rounded-xl md:m-6">
         Error: {error}
       </div>
     );
@@ -253,37 +253,36 @@ export default function DashboardHome() {
   ];
 
   return (
-    <section className="dashboard min-h-screen bg-slate-50 dark:bg-slate-900 p-3 sm:p-4 md:p-6 lg:p-8">
-      <div className="slide-up max-w-7xl mx-auto space-y-4 sm:space-y-6">
-
+    <section className="min-h-screen px-3 py-6 dashboard bg-slate-50 dark:bg-slate-900 sm:p-4 md:p-6 lg:p-8">
+      <div className="relative w-full mx-auto space-y-4 slide-up sm:space-y-6">
         {/* ---------- Header banner ---------- */}
-        <div className="dashboard-header relative overflow-hidden rounded-2xl p-5 sm:p-6 md:p-8 bg-gradient-to-br from-slate-100 via-sky-50 to-blue-100/60 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/40 border border-slate-200/50 dark:border-slate-700/50 shadow-lg shadow-sky-100/20 dark:shadow-sky-900/20 transition-all duration-300 hover:shadow-xl hover:shadow-sky-200/30 dark:hover:shadow-sky-900/20 hover:border-sky-300/50 hover:from-sky-100 hover:via-sky-200/50 hover:to-blue-200/60 dark:border-slate-700/50 dark:hover:border-slate-700/50 dark:bg-gradient-to-br dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/40 dark:hover:from-slate-800 dark:hover:via-slate-800/90 dark:hover:to-sky-900/40">
-          <div className="absolute -top-16 -right-16 w-40 h-40 sm:-top-20 sm:-right-20 sm:w-64 sm:h-64 bg-sky-400/10 rounded-full blur-3xl dark:bg-sky-500/5" />
-          <div className="absolute -bottom-16 -left-16 w-40 h-40 sm:-bottom-20 sm:-left-20 sm:w-64 sm:h-64 bg-blue-400/10 rounded-full blur-3xl dark:bg-blue-500/5" />
+        <div className="relative p-5 overflow-hidden transition-all duration-300 border shadow-lg dashboard-header rounded-2xl sm:p-6 md:p-8 bg-gradient-to-br from-slate-100 via-sky-50 to-blue-100/60 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/40 border-slate-200/50 dark:border-slate-700/50 shadow-sky-100/20 dark:shadow-sky-900/20 hover:shadow-xl hover:shadow-sky-200/30 dark:hover:shadow-sky-900/20 hover:border-sky-300/50 hover:from-sky-100 hover:via-sky-200/50 hover:to-blue-200/60 dark:hover:border-slate-700/50 dark:bg-gradient-to-br dark:hover:from-slate-800 dark:hover:via-slate-800/90 dark:hover:to-sky-900/40">
+          <div className="absolute w-40 h-40 rounded-full -top-16 -right-16 sm:-top-20 sm:-right-20 sm:w-64 sm:h-64 bg-sky-400/10 blur-3xl dark:bg-sky-500/5" />
+          <div className="absolute w-40 h-40 rounded-full -bottom-16 -left-16 sm:-bottom-20 sm:-left-20 sm:w-64 sm:h-64 bg-blue-400/10 blur-3xl dark:bg-blue-500/5" />
 
-          <div className="relative z-10">
+          <div className="relative z-10 p-4 sm:p-0">
             <p className="text-xs sm:text-sm uppercase tracking-[0.25em] sm:tracking-[0.35em] text-sky-500 dark:text-sky-400 font-semibold">
               {t("dashboard.adminOverview")}
             </p>
-            <h2 className="mt-2 text-xl sm:text-2xl md:text-3xl font-bold text-slate-900 dark:text-white">
+            <h2 className="mt-2 text-sm min-[300px]:text-lg font-bold sm:text-2xl md:text-3xl text-slate-900 dark:text-white">
               {t("dashboard.realtimeHealth")}
             </h2>
-            <p className="mt-2 text-sm sm:text-base text-slate-600 dark:text-slate-300">
+            <p className="mt-2 text-xs sm:text-base text-slate-600 dark:text-slate-300">
               {t("dashboard.healthDescription")}
             </p>
           </div>
         </div>
 
         {/* ---------- Metric cards ---------- */}
-        <div className="cards-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+        <div className="grid w-full grid-cols-1 gap-4 min-[350px]:grid-cols-2 min-[700px]:grid-cols-3 ">
           {cards.map((card, index) => (
             // was never triggering before because this class was missing.
             <div
-              className="card group p-4 sm:p-5 md:p-6 rounded-2xl transition-all duration-300 hover:shadow-xl hover:-translate-y-1 border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 hover:from-sky-100 hover:via-sky-200/50 hover:to-blue-200/60 dark:hover:from-slate-800 dark:hover:via-slate-800/90 dark:hover:to-sky-900/30 dark:hover:border-slate-700/50"
+              className="p-4 transition-all duration-300 border card group sm:p-5 md:p-6 rounded-2xl hover:shadow-xl hover:-translate-y-1 border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 hover:from-sky-100 hover:via-sky-200/50 hover:to-blue-200/60 dark:hover:from-slate-800 dark:hover:via-slate-800/90 dark:hover:to-sky-900/30 dark:hover:border-slate-700/50"
               key={index}
             >
               <div
-                className="card-icon w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center text-white text-lg sm:text-xl mb-3 sm:mb-4 transition-all duration-300 group-hover:scale-110"
+                className="flex items-center justify-center w-10 h-10 mb-3 text-lg text-white transition-all duration-300 rounded-lg card-icon sm:w-12 sm:h-12 sm:text-xl sm:mb-4 group-hover:scale-110"
                 style={{
                   background: `linear-gradient(135deg, ${card.color}, ${card.color}dd)`,
                 }}
@@ -291,15 +290,15 @@ export default function DashboardHome() {
                 {card.icon}
               </div>
 
-              <h4 className="text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wide">
+              <h4 className="text-xs font-medium tracking-wide uppercase sm:text-sm text-slate-500 dark:text-slate-400">
                 {card.title}
               </h4>
 
-              <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
+              <h2 className="mt-1 font-bold text-md md:text-xl text-slate-900 dark:text-white">
                 {card.value}
               </h2>
 
-              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+              <p className="mt-1 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
                 {card.caption}
               </p>
             </div>
@@ -307,15 +306,14 @@ export default function DashboardHome() {
         </div>
 
         {/* ---------- Order status + Best sellers ---------- */}
-        <div className="bottom-section grid gap-4 md:gap-6 lg:grid-cols-[2fr_1fr] items-start">
-
-          <div className="rounded-2xl p-4 sm:p-6 shadow-lg border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:from-sky-100 hover:via-sky-200/50 hover:to-blue-200/60 dark:hover:from-slate-800 dark:hover:via-slate-800/90 dark:hover:to-sky-900/30 dark:hover:border-slate-700/50">
-            <div className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center mb-5 sm:mb-6">
+        <div className="bottom-section grid gap-4 md:gap-6 grid-cols-[auto] min-[350px]:grid-cols-[1fr] min-[1200px]:grid-cols-[2fr_1fr] items-start w-full relative">
+          <div className="relative w-full p-4 transition-all duration-300 border shadow-xl rounded-xl sm:p-6 border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 hover:shadow-xl hover:-translate-y-1 hover:from-sky-100 hover:via-sky-200/50 hover:to-blue-200/60 dark:hover:from-slate-800 dark:hover:via-slate-800/90 dark:hover:to-sky-900/30 dark:hover:border-slate-700/50">
+            <div className="relative flex flex-col w-full gap-3 mb-5 sm:flex-row sm:justify-between sm:items-center sm:mb-6">
               <div>
                 <span className="text-sky-500 dark:text-sky-400 tracking-[0.2em] text-[11px] uppercase font-bold">
                   {t("dashboard.orderStatus")}
                 </span>
-                <h2 className="mt-2 text-lg sm:text-xl font-semibold text-slate-900 dark:text-white">
+                <h2 className="mt-2 text-sm min-[300px]:text-lg font-semibold sm:text-xl text-slate-900 dark:text-white">
                   {t("dashboard.liveFulfillment")}
                 </h2>
               </div>
@@ -325,7 +323,7 @@ export default function DashboardHome() {
               </span>
             </div>
 
-            <div className="grid gap-3 sm:gap-4 grid-cols-2 md:grid-cols-3">
+            <div className="grid gap-3 grid-cols-1 min-[350px]:grid-cols-2 sm:gap-4 min-[500px]:grid-cols-3  w-full relative">
               {[
                 "pending",
                 "processing",
@@ -340,7 +338,7 @@ export default function DashboardHome() {
                 return (
                   <div
                     key={statusKey}
-                    className={`${conf.bg} ${conf.border} border rounded-[18px] sm:rounded-[22px] p-3 sm:p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg`}
+                    className={`${conf.bg} ${conf.border} border rounded-lg p-3 sm:p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg`}
                   >
                     <div
                       className={`${conf.color} tracking-[0.15em] sm:tracking-[0.2em] text-[9px] sm:text-[10px] font-bold uppercase mb-1.5 sm:mb-2`}
@@ -348,7 +346,9 @@ export default function DashboardHome() {
                       {t(`status.${statusKey}`) || conf.label}
                     </div>
 
-                    <div className={`${conf.color} text-2xl sm:text-3xl font-bold`}>
+                    <div
+                      className={`${conf.color} text-2xl sm:text-3xl font-bold`}
+                    >
                       {count}
                     </div>
                   </div>
@@ -357,25 +357,25 @@ export default function DashboardHome() {
             </div>
           </div>
 
-          <div className="best-seller rounded-2xl p-4 sm:p-6 shadow-lg border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:from-sky-100 hover:via-sky-200/50 hover:to-blue-200/60 dark:hover:from-slate-800 dark:hover:via-slate-800/90 dark:hover:to-sky-900/30 dark:hover:border-slate-700/50">
-            <h3 className="text-base sm:text-lg font-semibold text-slate-900 dark:text-white mb-3 sm:mb-4">
+          <div className="p-4 min-w-0 transition-all duration-300 border shadow-lg best-seller rounded-xl sm:p-6 border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 hover:shadow-xl hover:-translate-y-1 hover:from-sky-100 hover:via-sky-200/50 hover:to-blue-200/60 dark:hover:from-slate-800 dark:hover:via-slate-800/90 dark:hover:to-sky-900/30 dark:hover:border-slate-700/50">
+            <h3 className="mb-3 text-base font-semibold sm:text-lg text-slate-900 dark:text-white sm:mb-4">
               {t("dashboard.bestSeller")}
             </h3>
 
             <div className="space-y-2.5 sm:space-y-3">
               {data?.topProducts?.map((product, index) => (
                 <div
-                  className="product-item bg-white/70 dark:bg-slate-800/50 rounded-xl border border-slate-200/50 dark:border-slate-700/50 p-3 sm:p-4 flex items-center gap-3 sm:gap-4 transition-all duration-300 hover:shadow-md backdrop-blur-sm hover:bg-white/90 dark:hover:bg-slate-800/50 dark:hover:border-slate-700/50"
+                  className="flex flex-col  min-[290px]:flex-row flex-wrap items-start min-[300px]:items-center gap-3 p-3 transition-all duration-300 border product-item bg-white/70 dark:bg-slate-800/50 rounded-xl border-slate-200/50 dark:border-slate-700/50 sm:p-4 sm:gap-4 hover:shadow-md backdrop-blur-sm hover:bg-white/90 dark:hover:bg-slate-800/50 dark:hover:border-slate-700/50"
                   key={index}
                 >
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-lg object-cover bg-slate-100 dark:bg-slate-700"
+                    className="object-cover w-10 h-10 rounded-md sm:w-12 sm:h-12 shrink-0 bg-slate-100 dark:bg-slate-700"
                   />
 
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-sm font-semibold text-slate-900 dark:text-white truncate">
+                  <div className="flex-1  min-w-0">
+                    <h4 className="text-xs text-wrap min-[300px]:text-sm font-semibold truncate text-slate-900 dark:text-white">
                       {product.name}
                     </h4>
                     <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
@@ -393,17 +393,17 @@ export default function DashboardHome() {
         </div>
 
         {/* ---------- Recent orders ---------- */}
-        <div className="rounded-2xl p-4 sm:p-6 shadow-lg border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:from-sky-100 hover:via-sky-200/50 hover:to-blue-200/60 dark:hover:from-slate-800 dark:hover:via-slate-800/90 dark:hover:to-sky-900/30 dark:hover:border-slate-700/50">
-          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-between sm:items-center mb-5 sm:mb-6">
+        <div className="p-4 min-w-0 transition-all duration-300 border shadow-lg rounded-xl sm:p-6 border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 hover:shadow-xl hover:-translate-y-1 hover:from-sky-100 hover:via-sky-200/50 hover:to-blue-200/60 dark:hover:from-slate-800 dark:hover:via-slate-800/90 dark:hover:to-sky-900/30 dark:hover:border-slate-700/50">
+          <div className="flex flex-col gap-3 mb-5 sm:flex-row sm:flex-wrap sm:justify-between sm:items-center sm:mb-6">
             <div>
               <span className="text-sky-500 dark:text-sky-400 tracking-[0.2em] text-[11px] uppercase font-bold">
                 {t("dashboard.recentOrders")}
               </span>
-              <h2 className="mt-2 text-lg sm:text-xl font-semibold text-slate-900 dark:text-white">
+              <h2 className="mt-2 text-md min-[350px]:text-lg font-semibold sm:text-xl text-slate-900 dark:text-white">
                 {t("dashboard.latestActivity")}
               </h2>
             </div>
-            <span className="self-start sm:self-auto rounded-full bg-sky-100 dark:bg-sky-500/10 px-3 py-1 text-xs font-bold text-sky-600 dark:text-sky-400">
+            <span className="self-start px-3 py-1 text-xs font-bold rounded-full sm:self-auto bg-sky-100 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400">
               {data.recentOrders?.length || 0} {t("dashboard.orders")}
             </span>
           </div>
@@ -412,16 +412,16 @@ export default function DashboardHome() {
             {data.recentOrders?.map((order) => (
               <div
                 key={order._id}
-                className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between rounded-xl border border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/30 px-4 py-4 transition-all duration-300 hover:border-slate-300 hover:bg-white/90 dark:hover:border-slate-700/50 dark:hover:bg-slate-800/30 backdrop-blur-sm"
+                className="flex flex-col gap-3 px-4 py-4 transition-all duration-300 border sm:flex-row sm:items-center sm:justify-between rounded-lg border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/30 hover:border-slate-300 hover:bg-white/90 dark:hover:border-slate-700/50 dark:hover:bg-slate-800/30 backdrop-blur-sm"
               >
-                <div className="min-w-0 flex-1">
-                  <h4 className="text-base font-bold text-slate-900 dark:text-white truncate">
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-base font-bold truncate text-slate-900 dark:text-white">
                     {order.user?.username ||
                       order.shippingAddress?.fullName ||
                       t("dashboard.customer")}
                   </h4>
 
-                  <p className="mt-1 text-sm text-slate-500 dark:text-slate-400 truncate">
+                  <p className="mt-1 text-xs text-wrap min-[350px]:text-sm truncate text-slate-500 dark:text-slate-400">
                     {order.items?.length > 0 ? (
                       <>
                         {order.items[0].name || "Product"}{" "}
@@ -435,7 +435,7 @@ export default function DashboardHome() {
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between sm:justify-end gap-3">
+                <div className="flex flex-wrap items-center justify-between gap-3 sm:justify-end">
                   <span
                     className={`rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider ${
                       actualStatusConfig[order.status]?.badgeBg ||
@@ -448,7 +448,7 @@ export default function DashboardHome() {
                     {t(`status.${order.status}`) || order.status}
                   </span>
 
-                  <span className="text-base font-bold text-slate-900 dark:text-white sm:min-w-[90px] sm:text-right">
+                  <span className="text-xs min-[400px]:text-base font-bold text-slate-900 dark:text-white sm:min-w-[90px] sm:text-right">
                     {formatCurrency(order.totalPrice)}
                   </span>
                 </div>
@@ -456,7 +456,6 @@ export default function DashboardHome() {
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );

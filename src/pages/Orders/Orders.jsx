@@ -407,14 +407,14 @@ function Orders() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center text-red-600">
-          <p className="text-xl font-bold flex gap-2 items-center justify-center text-sm md:text-lg">
+          <p className="flex items-center justify-center gap-2 text-sm text-xl font-bold md:text-lg">
             <BiSolidError />
             Error
           </p>
           <p className="text-sm md:text-lg">{error}</p>
           <button
             onClick={fetchOrders}
-            className="mt-4 px-4 py-2 cursor-pointer bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition text-xs sm:text-sm md:text-md "
+            className="px-4 py-2 mt-4 text-xs text-white transition bg-blue-500 rounded-lg cursor-pointer hover:bg-blue-600 sm:text-sm md:text-md "
           >
             Try Again
           </button>
@@ -425,7 +425,7 @@ function Orders() {
 
   return (
     <section className=" orders bg-slate-50 dark:bg-slate-900">
-      <div className=" px-5 py-8 min-[350px]:py-16 min-[500px]:px-10">
+      <div className=" px-5 py-8 min-[350px]:py-10 min-[500px]:px-10">
         <ToastContainer
           position="top-center"
           autoClose={3000}
@@ -439,7 +439,7 @@ function Orders() {
         />
         <div className="TranslateYMain">
           {/* headers start */}
-          <div className="flex flex-wrap justify-between items-center gap-5 pb-5">
+          <div className="flex flex-wrap items-center justify-between gap-5 pb-5">
             <div>
               <p className="text-slate-500 text-[8.5px] min-[870px]:text-[10px] font-bold uppercase tracking-[2px]">
                 {t("orders.adminManagement")}
@@ -532,9 +532,10 @@ function Orders() {
                   setMethodFilter("");
                   setCurrentPage(1);
                 }}
-                className="flex justify-center items-center gap-1  h-10 rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-700 outline-none transition focus:border-slate-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
+                className="flex items-center justify-center h-10 gap-1 px-3 text-sm transition bg-white border rounded-lg outline-none border-slate-200 text-slate-700 focus:border-slate-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
               >
-                <MdOutlineClear className=" text-md md:text-lg" /> {t("orders.clearFilters")}
+                <MdOutlineClear className=" text-md md:text-lg" />{" "}
+                {t("orders.clearFilters")}
               </button>
             )}
           </div>
@@ -578,7 +579,7 @@ function Orders() {
                         <tr
                           key={index}
                           onClick={() => openOrderDetails(order.id)}
-                          className="group opacity-100 transform-none cursor-pointer border-b border-slate-100 transition-colors  hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-800/40"
+                          className="transition-colors border-b opacity-100 cursor-pointer group transform-none border-slate-100 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-800/40"
                         >
                           <td className="px-3 py-1  min-[870px]:p-5">
                             <span className="flex items-center gap-0 text-[10px] min-[870px]:text-xs font-bold text-slate-500 dark:text-slate-400">
@@ -619,10 +620,12 @@ function Orders() {
                           <td className="px-3 py-1  min-[870px]:p-5">
                             <div className="flex flex-col justify-center gap-1.5">
                               <span className="inline-flex w-max items-center rounded-md px-2.5 py-1 min-[870px]:px-3.5 min-[870px]:py-1.5 text-[8px]  min-[870px]:text-[11px] font-semibold uppercase  bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300">
-                                {t(`common.${order.raw?.paymentStatus}`) || order.payment}
+                                {t(`common.${order.raw?.paymentStatus}`) ||
+                                  order.payment}
                               </span>
                               <span className="text-[8px] min-[870px]:text-[11px] capitalize text-slate-400">
-                                {t(`common.${order.raw?.paymentMethod}`) || order.method}
+                                {t(`common.${order.raw?.paymentMethod}`) ||
+                                  order.method}
                               </span>
                             </div>
                           </td>
@@ -635,7 +638,7 @@ function Orders() {
                       <tr>
                         <td
                           colSpan="6"
-                          className="px-4 py-8 text-center text-sm text-slate-500"
+                          className="px-4 py-8 text-sm text-center text-slate-500"
                         >
                           {t("orders.noOrders")}
                         </td>

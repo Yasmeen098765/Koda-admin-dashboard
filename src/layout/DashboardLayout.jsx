@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 
@@ -8,7 +8,7 @@ export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const [darkMode, setDarkMode] = useState(
-    () => localStorage.getItem("theme") === "dark"
+    () => localStorage.getItem("theme") === "dark",
   );
 
   useEffect(() => {
@@ -19,16 +19,16 @@ export default function DashboardLayout() {
   const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
   return (
-    <div className="flex h-screen bg-slate-50 dark:bg-slate-950 transition-colors overflow-hidden">
+    <div className="flex h-screen overflow-hidden transition-colors bg-slate-50 dark:bg-slate-950">
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex flex-col flex-1 min-w-0">
         <Navbar
           onMenuClick={() => setSidebarOpen((prev) => !prev)}
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}
         />
-        <main className="flex-1 overflow-y-auto p-4 lg:p-6">
+        <main className="flex-1 p-4 overflow-y-auto lg:p-6">
           <Outlet />
         </main>
       </div>

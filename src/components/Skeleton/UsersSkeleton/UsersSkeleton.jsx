@@ -6,17 +6,17 @@ const StatsSkeleton = ({ baseColor, highlightColor }) => {
   const stats = Array(4).fill(null);
 
   const content = (
-    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
+    <div className="grid grid-cols-1 gap-5 mb-8 sm:grid-cols-2 xl:grid-cols-4">
       {stats.map((_, index) => (
         <div
           key={index}
-          className="bg-white rounded-2xl p-5 flex items-center justify-between shadow-sm border border-gray-100 dark:bg-slate-900 dark:border-slate-800"
+          className="flex items-center justify-between p-5 bg-white border border-gray-100 shadow-sm rounded-2xl dark:bg-slate-900 dark:border-slate-800"
         >
           <div>
             <Skeleton width={80} height={14} className="mb-2" />
             <Skeleton width={60} height={32} />
           </div>
-          <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-gray-200 dark:bg-slate-700">
+          <div className="flex items-center justify-center w-12 h-12 bg-gray-200 rounded-xl dark:bg-slate-700">
             <Skeleton circle width={24} height={24} />
           </div>
         </div>
@@ -39,21 +39,21 @@ const TableSkeleton = ({ baseColor, highlightColor }) => {
   const rows = Array(5).fill(null);
 
   const content = (
-    <div className="hidden lg:block bg-slate-100  dark:bg-slate-900 rounded-2xl shadow-sm border-0 border-slate-700/50 overflow-hidden ">
-      <div className="overflow-x-auto  ">
+    <div className="hidden overflow-hidden border-0 shadow-sm lg:block bg-slate-100 dark:bg-slate-900 rounded-2xl border-slate-700/50 ">
+      <div className="overflow-x-auto ">
         <table className="w-full">
           <thead>
-            <tr className="border-b dark:border-gray-500/30">
-              <th className="text-left text-sm font-medium text-gray-500 px-6 py-4">
+            <tr className="border-b dark:border-gray-500/20">
+              <th className="px-6 py-4 text-sm font-medium text-left text-gray-500">
                 <Skeleton width={60} height={14} />
               </th>
-              <th className="text-left text-sm font-medium text-gray-500 px-6 py-4">
+              <th className="px-6 py-4 text-sm font-medium text-left text-gray-500">
                 <Skeleton width={40} height={14} />
               </th>
-              <th className="text-left text-sm font-medium text-gray-500 px-6 py-4">
+              <th className="px-6 py-4 text-sm font-medium text-left text-gray-500">
                 <Skeleton width={50} height={14} />
               </th>
-              <th className="text-left text-sm font-medium text-gray-500 px-6 py-4">
+              <th className="px-6 py-4 text-sm font-medium text-left text-gray-500">
                 <Skeleton width={50} height={14} />
               </th>
             </tr>
@@ -62,7 +62,7 @@ const TableSkeleton = ({ baseColor, highlightColor }) => {
             {rows.map((_, index) => (
               <tr
                 key={index}
-                className="border-b border-gray-500 dark:border-slate-800 dark:hover:bg-slate-800"
+                className="border-b border-gray-500/10 dark:border-slate-500/20 dark:hover:bg-slate-800/20"
               >
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-3">
@@ -113,7 +113,7 @@ const MobileCardsSkeleton = ({ baseColor, highlightColor }) => {
       {cards.map((_, index) => (
         <div
           key={index}
-          className="rounded-3xl border border-gray-100 bg-white p-5 shadow-sm mb-4 dark:bg-slate-900 dark:border-slate-800"
+          className="p-5 mb-4 bg-white border border-gray-100 shadow-sm rounded-3xl dark:bg-slate-900 dark:border-slate-800"
         >
           <div className="flex items-start gap-4">
             <Skeleton circle width={48} height={48} />
@@ -125,19 +125,19 @@ const MobileCardsSkeleton = ({ baseColor, highlightColor }) => {
                 </div>
                 <Skeleton width={80} height={24} borderRadius={9999} />
               </div>
-              <div className="mt-4 grid grid-cols-2 gap-3">
-                <div className="rounded-2xl bg-gray-50 px-3 py-2 dark:bg-slate-800">
+              <div className="grid grid-cols-2 gap-3 mt-4">
+                <div className="px-3 py-2 rounded-2xl bg-gray-50 dark:bg-slate-800">
                   <Skeleton width={40} height={12} className="mb-1" />
                   <Skeleton width={60} height={16} />
                 </div>
-                <div className="rounded-2xl bg-gray-50 px-3 py-2 dark:bg-slate-800">
+                <div className="px-3 py-2 rounded-2xl bg-gray-50 dark:bg-slate-800">
                   <Skeleton width={40} height={12} className="mb-1" />
                   <Skeleton width={70} height={24} borderRadius={9999} />
                 </div>
               </div>
             </div>
           </div>
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 mt-4">
             <Skeleton width={80} height={36} borderRadius={16} />
             <Skeleton width={100} height={36} borderRadius={16} />
             <Skeleton width={80} height={36} borderRadius={16} />
@@ -160,9 +160,9 @@ const MobileCardsSkeleton = ({ baseColor, highlightColor }) => {
 
 const UsersSkeleton = ({ baseColor, highlightColor }) => {
   const content = (
-    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8 dark:bg-slate-900">
+    <div className="min-h-screen px-4 py-8 bg-gray-50 sm:px-6 lg:px-8 dark:bg-slate-900">
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-8">
+        <div className="flex flex-col gap-4 mb-8 md:flex-row md:items-center md:justify-between">
           <div>
             <Skeleton width={150} height={14} className="mb-1" />
             <Skeleton width={200} height={32} />

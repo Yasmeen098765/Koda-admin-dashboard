@@ -1,27 +1,25 @@
-
-import { useRef, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, FreeMode, Thumbs } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/free-mode';
-import 'swiper/css/thumbs';
-import Products from '../../pages/Products';
+import { useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, FreeMode, Thumbs } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/thumbs";
+import Products from "../../pages/Products";
 
 // استقبلنا الـ images كـ prop هنا
 export default function Slider({ images }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const mainSwiperRef = useRef(null);
 
-
   // The API returns image objects ({ url }), while local previews can be URL strings.
   // Normalize both shapes before passing values to the img `src` attribute.
   const imageList = (Array.isArray(images) ? images : [])
-    .map((image) => (typeof image === 'string' ? image : image?.url))
+    .map((image) => (typeof image === "string" ? image : image?.url))
     .filter(Boolean);
 
   if (!imageList.length) {
     return (
-      <div className="flex h-80 items-center justify-center rounded-[28px] border border-slate-200 bg-slate-50 text-sm text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">
+      <div className="flex items-center justify-center text-sm border h-80 rounded-xl border-slate-200 bg-slate-50 text-slate-500 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400">
         No images available
       </div>
     );
@@ -35,7 +33,7 @@ export default function Slider({ images }) {
         autoplay={{ delay: 2000, disableOnInteraction: false }}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[Autoplay, FreeMode, Thumbs]}
-        className="mb-4 rounded-[28px] border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900"
+        className="p-4 mb-4 border shadow-sm bg-wxlhite rounded-xl border-slate-200 dark:border-slate-800 dark:bg-slate-900"
         onSwiper={(swiper) => {
           mainSwiperRef.current = swiper;
         }}
@@ -45,7 +43,7 @@ export default function Slider({ images }) {
             <img
               src={imageUrl}
               alt={`Product ${index + 1}`}
-              className="h-100 w-full rounded-[22px] object-contain cursor-pointer"
+              className="object-contain w-full cursor-pointer h-100 rounded-xl"
             />
           </SwiperSlide>
         ))}
@@ -61,10 +59,13 @@ export default function Slider({ images }) {
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Thumbs]}
-        className="thumbs-slider p-4"
+        className="p-4 thumbs-slider"
       >
         {imageList.map((imageUrl, index) => (
-          <SwiperSlide key={`thumb-${index}`} className="rounded-2xl bg-white shadow-sm dark:bg-slate-800">
+          <SwiperSlide
+            key={`thumb-${index}`}
+            className="bg-white shadow-sm rounded-xl dark:bg-slate-800"
+          >
             <img
               src={imageUrl}
               alt={`Thumbnail ${index + 1}`}

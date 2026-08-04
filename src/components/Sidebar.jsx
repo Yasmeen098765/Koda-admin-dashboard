@@ -15,7 +15,7 @@ export default function Sidebar({ open, onClose }) {
   const { t } = useLanguage();
 
   const NAV_ITEMS = [
-    { label: t("sidebar.dashboard"), icon: Home, to: "/" },
+    { label: t("sidebar.dashboard"), icon: Home, to: "/dashboard" },
     { label: t("sidebar.users"), icon: Users, to: "/users" },
     { label: t("sidebar.products"), icon: Package, to: "/products" },
     { label: t("sidebar.addProduct"), icon: Plus, to: "/add-product" },
@@ -39,12 +39,12 @@ export default function Sidebar({ open, onClose }) {
         lg:sticky lg:translate-x-0 lg:top-0 lg:self-start
         ${open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
       >
-        <div className="px-6 pt-6 pb-5 flex items-start justify-between">
+        <div className="flex items-start justify-between px-6 pt-6 pb-5">
           <div>
             <p className="text-xs font-bold tracking-[0.2em] text-sky-500">
               {t("sidebar.commerce")}
             </p>
-            <p className="text-xl font-bold text-slate-900 dark:text-white mt-1">
+            <p className="mt-1 text-xl font-bold text-slate-900 dark:text-white">
               {t("sidebar.adminPanel")}
             </p>
           </div>
@@ -81,11 +81,11 @@ export default function Sidebar({ open, onClose }) {
         </nav>
 
         <div className="p-4 pb-6 ">
-          <div className="rounded-2xl p-4 bg-gradient-to-br from-sky-400 to-blue-600 text-white shadow-lg shadow-blue-500/20">
+          <div className="p-4 text-white shadow-lg rounded-2xl bg-gradient-to-br from-sky-400 to-blue-600 shadow-blue-500/20">
             <p className="text-[10px] font-bold tracking-[0.25em] opacity-90">
               {t("sidebar.liveStatus")}
             </p>
-            <p className="font-bold mt-1 leading-snug">
+            <p className="mt-1 font-bold leading-snug">
               {t("sidebar.liveMessage")}
             </p>
           </div>

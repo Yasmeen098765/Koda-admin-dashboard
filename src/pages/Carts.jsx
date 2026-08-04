@@ -47,16 +47,15 @@ function Carts() {
   }
 
   return (
-    <div className="p-4 lg:p-8 min-h-screen bg-slate-50/50 text-slate-900 dark:bg-slate-900">
+    <div className="min-h-screen p-4 lg:p-8 bg-slate-50/50 text-slate-900 dark:bg-slate-900">
       <div className="mx-auto max-w-[1600px] space-y-6 lg:space-y-8 slide-up">
-        
-        <div className="relative overflow-hidden rounded-3xl border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 p-6 shadow-lg transition-all duration-300 hover:shadow-xl">
-          <div className="absolute -right-14 -top-14 h-44 w-44 rounded-full bg-cyan-400/10 blur-3xl dark:bg-cyan-500/5"></div>
-          <div className="absolute bottom-0 left-0 h-44 w-44 rounded-full bg-blue-400/10 blur-3xl dark:bg-blue-500/5"></div>
-          
+        <div className="relative p-6 overflow-hidden transition-all duration-300 border shadow-lg rounded-xl border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 hover:shadow-xl">
+          <div className="absolute rounded-full -right-14 -top-14 h-44 w-44 bg-cyan-400/10 blur-3xl dark:bg-cyan-500/5"></div>
+          <div className="absolute bottom-0 left-0 rounded-full h-44 w-44 bg-blue-400/10 blur-3xl dark:bg-blue-500/5"></div>
+
           <div className="relative z-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 to-sky-500 text-white shadow-lg shadow-cyan-500/30">
+              <div className="flex items-center justify-center text-white shadow-lg h-14 w-14 rounded-xl bg-gradient-to-br from-cyan-500 to-sky-500 shadow-cyan-500/30">
                 <FiShoppingCart size={28} />
               </div>
               <div>
@@ -68,7 +67,7 @@ function Carts() {
                 </h2>
               </div>
             </div>
-            <span className="rounded-xl border border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 backdrop-blur-sm">
+            <span className="px-4 py-2 text-sm font-medium border rounded-lg border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 backdrop-blur-sm">
               {t("dashboard.updatedFromApi")}
             </span>
           </div>
@@ -105,11 +104,11 @@ function Carts() {
         </div>
 
         {carts.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 rounded-3xl border border-dashed border-slate-200 dark:border-slate-700 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30">
-            <div className="w-20 h-20 flex items-center justify-center rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500 mb-4">
+          <div className="flex flex-col items-center justify-center py-20 border border-dashed rounded-xl border-slate-200 dark:border-slate-700 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30">
+            <div className="flex items-center justify-center w-20 h-20 mb-4 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500">
               <FiShoppingCart size={32} />
             </div>
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+            <h3 className="mb-2 text-xl font-bold text-slate-900 dark:text-white">
               {t("carts.noCarts")}
             </h3>
             <p className="text-slate-500 dark:text-slate-400">
@@ -118,7 +117,7 @@ function Carts() {
           </div>
         ) : (
           <div className="grid gap-6">
-            <div className="rounded-3xl border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 p-6 shadow-lg">
+            <div className="p-6 border shadow-lg rounded-xl border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30">
               <p className="text-center text-slate-500 dark:text-slate-400">
                 Cart items will be displayed here
               </p>
@@ -143,10 +142,10 @@ function StatCard({ icon, value, label, tone, className = "" }) {
 
   return (
     <div
-      className={`flex flex-col rounded-2xl border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${className}`}
+      className={`flex flex-col rounded-xl border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${className}`}
     >
       <div
-        className={`mb-5 flex h-12 w-12 items-center justify-center rounded-2xl text-xl ${tones[tone]}`}
+        className={`mb-5 flex h-12 w-12 items-center justify-center rounded-xl text-xl ${tones[tone]}`}
       >
         {icon}
       </div>

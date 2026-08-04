@@ -8,8 +8,6 @@ import {
   FiSun,
   FiGlobe,
   FiBell,
-  FiUser,
-  FiMail,
   FiShield,
   FiDatabase,
   FiCloud,
@@ -43,15 +41,15 @@ export default function Settings() {
   }
 
   return (
-    <div className="p-4 lg:p-8 min-h-screen bg-slate-50/50 text-slate-900 dark:bg-slate-900">
+    <div className="min-h-screen p-4 lg:p-8 bg-slate-50/50 text-slate-900 dark:bg-slate-900">
       <div className="mx-auto max-w-[1600px] space-y-6 lg:space-y-8 slide-up">
-        <div className="relative overflow-hidden rounded-3xl border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 p-6 shadow-lg transition-all duration-300 hover:shadow-xl">
-          <div className="absolute -right-14 -top-14 h-44 w-44 rounded-full bg-cyan-400/10 blur-3xl dark:bg-cyan-500/5"></div>
-          <div className="absolute bottom-0 left-0 h-44 w-44 rounded-full bg-blue-400/10 blur-3xl dark:bg-blue-500/5"></div>
+        <div className="relative p-6 overflow-hidden transition-all duration-300 border shadow-lg rounded-xl border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 hover:shadow-xl">
+          <div className="absolute rounded-full -right-14 -top-14 h-44 w-44 bg-cyan-400/10 blur-3xl dark:bg-cyan-500/5"></div>
+          <div className="absolute bottom-0 left-0 rounded-full h-44 w-44 bg-blue-400/10 blur-3xl dark:bg-blue-500/5"></div>
 
           <div className="relative z-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-4">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 to-sky-500 text-white shadow-lg shadow-cyan-500/30">
+              <div className="flex items-center justify-center text-white shadow-lg h-14 w-14 rounded-xl bg-gradient-to-br from-cyan-500 to-sky-500 shadow-cyan-500/30">
                 <FiSettings size={28} />
               </div>
               <div>
@@ -63,7 +61,7 @@ export default function Settings() {
                 </h2>
               </div>
             </div>
-            <span className="rounded-xl border border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 backdrop-blur-sm">
+            <span className="px-4 py-2 text-sm font-medium border rounded-lg border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 backdrop-blur-sm">
               v2.0.1
             </span>
           </div>
@@ -82,7 +80,7 @@ export default function Settings() {
             <div className="flex items-center gap-3 mt-3">
               <button
                 onClick={toggleTheme}
-                className={`flex cursor-pointer items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-all ${
+                className={`flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-all ${
                   !isDarkMode
                     ? "bg-gradient-to-r from-cyan-500 to-sky-500 text-white shadow-lg shadow-cyan-500/30"
                     : "bg-white/70 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 border border-slate-200/50 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700/50"
@@ -93,7 +91,7 @@ export default function Settings() {
               </button>
               <button
                 onClick={toggleTheme}
-                className={`flex cursor-pointer items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-all ${
+                className={`flex cursor-pointer items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition-all ${
                   isDarkMode
                     ? "bg-gradient-to-r from-cyan-500 to-sky-500 text-white shadow-lg shadow-cyan-500/30"
                     : "bg-white/70 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 border border-slate-200/50 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-700/50"
@@ -141,10 +139,10 @@ export default function Settings() {
             description={t("settings.securityDesc")}
             tone="emerald"
           >
-            <button className="w-full cursor-pointer rounded-xl border border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all backdrop-blur-sm">
+            <button className="w-full px-4 py-2 text-sm font-semibold transition-all border rounded-lg cursor-pointer border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 backdrop-blur-sm">
               {t("settings.changePassword")}
             </button>
-            <button className="w-full cursor-pointer rounded-xl border border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all backdrop-blur-sm mt-2">
+            <button className="w-full px-4 py-2 mt-2 text-sm font-semibold transition-all border rounded-lg cursor-pointer border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 backdrop-blur-sm">
               {t("settings.twoFactor")}
             </button>
           </SettingCard>
@@ -158,7 +156,7 @@ export default function Settings() {
             <select
               value={lang}
               onChange={(e) => setLang(e.target.value)}
-              className="w-full cursor-pointer rounded-xl border border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 px-4 py-2 text-sm text-slate-600 dark:text-slate-300 outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 backdrop-blur-sm"
+              className="w-full px-4 py-2 text-sm border rounded-lg outline-none cursor-pointer border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 backdrop-blur-sm"
             >
               <option value="en">English</option>
               <option value="ar">العربية</option>
@@ -175,7 +173,7 @@ export default function Settings() {
               <FiCheckCircle className="text-emerald-500" />
               <span>{t("settings.apiStatus")}</span>
             </div>
-            <button className="w-full rounded-xl cursor-pointer border border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all backdrop-blur-sm mt-2">
+            <button className="w-full px-4 py-2 mt-2 text-sm font-semibold transition-all border rounded-lg cursor-pointer border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 backdrop-blur-sm">
               <FiRefreshCw className="inline mr-2" />
               {t("settings.refreshConnection")}
             </button>
@@ -200,7 +198,7 @@ export default function Settings() {
                 <div className="w-11 h-6 bg-slate-200 dark:bg-slate-700 rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-cyan-500 peer-checked:to-sky-500"></div>
               </label>
             </div>
-            <button className="w-full cursor-pointer rounded-xl border border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-all backdrop-blur-sm mt-2">
+            <button className="w-full px-4 py-2 mt-2 text-sm font-semibold transition-all border rounded-lg cursor-pointer border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 backdrop-blur-sm">
               {t("settings.exportData")}
             </button>
           </SettingCard>
@@ -221,10 +219,10 @@ function SettingCard({ icon, title, description, tone, children }) {
   };
 
   return (
-    <div className="rounded-2xl border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    <div className="p-6 transition-all duration-300 border shadow-lg rounded-xl border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 hover:shadow-xl hover:-translate-y-1">
       <div className="flex items-start gap-3">
         <div
-          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${toneColors[tone]} text-white shadow-lg shadow-${tone}-500/30`}
+          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br ${toneColors[tone]} text-white shadow-lg shadow-${tone}-500/30`}
         >
           {icon}
         </div>

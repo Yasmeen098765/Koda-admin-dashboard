@@ -193,24 +193,23 @@ export default function QuickEdit({
       className="slide-up fixed inset-0 z-[100] flex items-center justify-center bg-black/40 p-4 backdrop-blur-sm transition-all"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl w-full max-w-4xl overflow-hidden flex flex-col max-h-[92vh] border border-slate-200 dark:border-slate-700">
+      <div className="bg-white dark:bg-slate-900 rounded-xl shadow-2xl w-full max-w-4xl overflow-hidden flex flex-col max-h-[92vh] border border-slate-200 dark:border-slate-700">
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-700 shrink-0 bg-slate-50/80 dark:bg-slate-900/80">
-          <h2 className="font-extrabold text-xl tracking-tight text-slate-900 dark:text-white">
+          <h2 className="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             {t("quickEdit.title")}
           </h2>
           <button
             onClick={onClose}
-            className="flex h-8 w-8 items-center cursor-pointer justify-center rounded-full bg-slate-200 text-slate-600 hover:bg-slate-300 hover:text-slate-800 transition-colors dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600 dark:hover:text-white"
+            className="flex items-center justify-center w-8 h-8 transition-colors rounded-full cursor-pointer bg-slate-200 text-slate-600 hover:bg-slate-300 hover:text-slate-800 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600 dark:hover:text-white"
           >
             <FiX size={18} />
           </button>
         </div>
 
-    
-        <div className="flex-1 overflow-y-auto p-6 custom-scrollbar">
-          <form className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <div className="lg:col-span-4 flex flex-col gap-6">
-              <div className="bg-slate-50 dark:bg-slate-800/50 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+        <div className="flex-1 p-6 overflow-y-auto custom-scrollbar">
+          <form className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+            <div className="flex flex-col gap-6 lg:col-span-4">
+              <div className="p-5 border bg-slate-50 dark:bg-slate-800/50 rounded-2xl border-slate-200 dark:border-slate-700">
                 <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-3 block">
                   {t("quickEdit.media")} ({imagePreviews.length}/5)
                 </label>
@@ -218,17 +217,17 @@ export default function QuickEdit({
                   {imagePreviews.map((img, num) => (
                     <div
                       key={num}
-                      className="group relative rounded-xl overflow-hidden aspect-square bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700"
+                      className="relative overflow-hidden border rounded-lg group aspect-square bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700"
                     >
                       <img
                         src={img}
                         alt="Product"
-                        className="w-full h-full object-cover"
+                        className="object-cover w-full h-full"
                       />
                       <button
                         type="button"
                         onClick={() => removeImage(num)}
-                        className="absolute top-1 right-1 cursor-pointer flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-white opacity-0 transition-opacity group-hover:opacity-100 shadow-md hover:bg-red-600"
+                        className="absolute flex items-center justify-center w-6 h-6 text-white transition-opacity bg-red-500 rounded-full shadow-md opacity-0 cursor-pointer top-1 right-1 group-hover:opacity-100 hover:bg-red-600"
                       >
                         <FiX size={12} />
                       </button>
@@ -237,10 +236,10 @@ export default function QuickEdit({
                   {imagePreviews.length < 5 && (
                     <div
                       onClick={triggerFileUpload}
-                      className="rounded-xl border-2 border-dashed border-cyan-400/50 bg-cyan-50/50 dark:border-cyan-500/30 dark:bg-slate-800/30 flex flex-col items-center justify-center cursor-pointer hover:bg-cyan-100/50 dark:hover:bg-slate-800/50 transition-colors aspect-square"
+                      className="flex flex-col items-center justify-center transition-colors border-2 border-dashed rounded-lg cursor-pointer border-cyan-400/50 bg-cyan-50/50 dark:border-cyan-500/30 dark:bg-slate-800/30 hover:bg-cyan-100/50 dark:hover:bg-slate-800/50 aspect-square"
                     >
                       <FiImage
-                        className="text-cyan-500 dark:text-cyan-400 mb-1"
+                        className="mb-1 text-cyan-500 dark:text-cyan-400"
                         size={20}
                       />
                       <span className="text-[10px] font-bold text-cyan-500 dark:text-cyan-400">
@@ -259,7 +258,7 @@ export default function QuickEdit({
                 />
               </div>
 
-              <div className="bg-slate-50 dark:bg-slate-800/50 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+              <div className="p-5 border bg-slate-50 dark:bg-slate-800/50 rounded-2xl border-slate-200 dark:border-slate-700">
                 <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-4 block">
                   {t("quickEdit.status")}
                 </label>
@@ -270,9 +269,9 @@ export default function QuickEdit({
                       name="featured"
                       checked={product.featured}
                       onChange={handleChange}
-                      className="w-5 h-5 accent-cyan-500 rounded border-slate-300 dark:border-slate-600"
+                      className="w-5 h-5 rounded accent-cyan-500 border-slate-300 dark:border-slate-600"
                     />
-                    <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 group-hover:text-cyan-500 transition-colors">
+                    <span className="text-sm font-semibold transition-colors text-slate-700 dark:text-slate-300 group-hover:text-cyan-500">
                       {t("quickEdit.featuredProduct")}
                     </span>
                   </label>
@@ -282,9 +281,9 @@ export default function QuickEdit({
                       name="isActive"
                       checked={product.isActive}
                       onChange={handleChange}
-                      className="w-5 h-5 accent-cyan-500 rounded border-slate-300 dark:border-slate-600"
+                      className="w-5 h-5 rounded accent-cyan-500 border-slate-300 dark:border-slate-600"
                     />
-                    <span className="text-sm font-semibold text-slate-700 dark:text-slate-300 group-hover:text-cyan-500 transition-colors">
+                    <span className="text-sm font-semibold transition-colors text-slate-700 dark:text-slate-300 group-hover:text-cyan-500">
                       {t("quickEdit.activeListing")}
                     </span>
                   </label>
@@ -292,7 +291,7 @@ export default function QuickEdit({
               </div>
             </div>
 
-            <div className="lg:col-span-8 flex flex-col gap-5">
+            <div className="flex flex-col gap-5 lg:col-span-8">
               <div className="grid gap-5 sm:grid-cols-2">
                 <div className="flex flex-col gap-1.5 sm:col-span-2">
                   <label className="text-[11px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-wider">
@@ -302,7 +301,7 @@ export default function QuickEdit({
                     name="name"
                     value={product.name}
                     onChange={handleChange}
-                    className="w-full h-12 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                    className="w-full h-12 px-4 text-sm transition-all bg-white border rounded-lg dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                     required
                   />
                 </div>
@@ -315,7 +314,7 @@ export default function QuickEdit({
                     name="shortDescription"
                     value={product.shortDescription}
                     onChange={handleChange}
-                    className="w-full h-12 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                    className="w-full h-12 px-4 text-sm transition-all bg-white border rounded-lg dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                     required
                   />
                 </div>
@@ -329,7 +328,7 @@ export default function QuickEdit({
                     type="number"
                     value={product.price}
                     onChange={handleChange}
-                    className="w-full h-12 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                    className="w-full h-12 px-4 text-sm transition-all bg-white border rounded-lg dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                     min="0"
                     step="1"
                     required
@@ -345,7 +344,7 @@ export default function QuickEdit({
                     type="number"
                     value={product.discountPrice}
                     onChange={handleChange}
-                    className="w-full h-12 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                    className="w-full h-12 px-4 text-sm transition-all bg-white border rounded-lg dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                     min="0"
                     step="1"
                   />
@@ -360,7 +359,7 @@ export default function QuickEdit({
                     type="number"
                     value={product.stock}
                     onChange={handleChange}
-                    className="w-full h-12 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                    className="w-full h-12 px-4 text-sm transition-all bg-white border rounded-lg dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                     min="0"
                     required
                   />
@@ -374,7 +373,7 @@ export default function QuickEdit({
                     name="sku"
                     value={product.sku}
                     onChange={handleChange}
-                    className="w-full h-12 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                    className="w-full h-12 px-4 text-sm transition-all bg-white border rounded-lg dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                   />
                 </div>
 
@@ -386,7 +385,7 @@ export default function QuickEdit({
                     name="category"
                     value={formatCategory(product.category)}
                     onChange={handleChange}
-                    className="w-full h-12 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                    className="w-full h-12 px-4 text-sm transition-all bg-white border rounded-lg dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                     required
                   >
                     <option value="">{t("addProduct.selectCategory")}</option>
@@ -414,7 +413,7 @@ export default function QuickEdit({
                     name="brand"
                     value={product.brand}
                     onChange={handleChange}
-                    className="w-full h-12 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                    className="w-full h-12 px-4 text-sm transition-all bg-white border rounded-lg dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                   />
                 </div>
 
@@ -427,13 +426,13 @@ export default function QuickEdit({
                       value={tagInput}
                       onChange={(e) => setTagInput(e.target.value)}
                       onKeyDown={handleTagKeyDown}
-                      className="flex-1 h-12 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
+                      className="flex-1 h-12 px-4 text-sm transition-all bg-white border rounded-lg dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                       placeholder={t("addProduct.tagPlaceholder")}
                     />
                     <button
                       type="button"
                       onClick={handleAddTag}
-                      className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-xl bg-cyan-500 hover:bg-cyan-600 text-white shadow-lg shadow-cyan-500/30 dark:bg-cyan-500 dark:hover:bg-cyan-600 transition-all"
+                      className="flex items-center justify-center w-12 h-12 text-white transition-all rounded-lg shadow-lg cursor-pointer bg-cyan-500 hover:bg-cyan-600 shadow-cyan-500/30 dark:bg-cyan-500 dark:hover:bg-cyan-600"
                     >
                       <FiPlus size={20} />
                     </button>
@@ -449,7 +448,7 @@ export default function QuickEdit({
                           <button
                             type="button"
                             onClick={() => handleRemoveTag(tag)}
-                            className="text-slate-400 cursor-pointer hover:text-red-500 dark:hover:text-red-400 transition-colors"
+                            className="transition-colors cursor-pointer text-slate-400 hover:text-red-500 dark:hover:text-red-400"
                           >
                             <FiX size={14} />
                           </button>
@@ -467,7 +466,7 @@ export default function QuickEdit({
           <button
             type="button"
             onClick={onClose}
-            className="px-6 py-2.5 text-sm cursor-pointer font-bold text-slate-600 hover:text-slate-800 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 dark:text-slate-300 dark:hover:text-white dark:bg-slate-800 dark:hover:bg-slate-700 dark:border-slate-700 dark:hover:border-slate-600 rounded-xl transition-all"
+            className="px-6 py-2.5 text-sm cursor-pointer font-bold text-slate-600 hover:text-slate-800 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 dark:text-slate-300 dark:hover:text-white dark:bg-slate-800 dark:hover:bg-slate-700 dark:border-slate-700 dark:hover:border-slate-600 rounded-lg transition-all"
           >
             {t("quickEdit.cancel")}
           </button>
@@ -475,11 +474,12 @@ export default function QuickEdit({
             type="button"
             onClick={handleSave}
             disabled={loading}
-            className="flex items-center cursor-pointer gap-2 px-8 py-2.5 bg-cyan-500 hover:bg-cyan-600 active:scale-95 disabled:opacity-50 disabled:active:scale-100 rounded-xl text-sm font-bold text-white shadow-lg shadow-cyan-500/30 dark:shadow-cyan-500/20 transition-all"
+            className="flex items-center cursor-pointer gap-2 px-8 py-2.5 bg-cyan-500 hover:bg-cyan-600 active:scale-95 disabled:opacity-50 disabled:active:scale-100 rounded-lg text-sm font-bold text-white shadow-lg shadow-cyan-500/30 dark:shadow-cyan-500/20 transition-all"
           >
             {loading ? (
               <>
-                <FiLoader className="animate-spin" size={16} /> {t("quickEdit.saving")}
+                <FiLoader className="animate-spin" size={16} />{" "}
+                {t("quickEdit.saving")}
               </>
             ) : (
               t("quickEdit.saveChanges")

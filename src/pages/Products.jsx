@@ -109,11 +109,25 @@ export default function Products() {
 
         if (!isSubscribed) return;
 
-        const rawProducts = data?.products || data?.data || (Array.isArray(data) ? data : []);
+        const rawProducts =
+          data?.products || data?.data || (Array.isArray(data) ? data : []);
         const productList = Array.isArray(rawProducts) ? rawProducts : [];
         setProducts(productList);
-        setTotalProducts(Number(data?.totalProducts || data?.total || data?.count || productList.length) || 0);
-        setTotalPages(Number(data?.totalPages || data?.pages || Math.ceil(productList.length / 12)) || 1);
+        setTotalProducts(
+          Number(
+            data?.totalProducts ||
+              data?.total ||
+              data?.count ||
+              productList.length,
+          ) || 0,
+        );
+        setTotalPages(
+          Number(
+            data?.totalPages ||
+              data?.pages ||
+              Math.ceil(productList.length / 12),
+          ) || 1,
+        );
       } catch (err) {
         if (!isSubscribed) return;
         if (
@@ -193,11 +207,10 @@ export default function Products() {
   return (
     <div className="min-h-screen p-4 sm:p-6 lg:p-8 text-slate-900 bg-slate-50 dark:bg-slate-900 dark:text-slate-200">
       <div className="slide-up mx-auto max-w-[1600px] space-y-6 lg:space-y-8">
-
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between p-6 rounded-3xl bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 shadow-lg border border-slate-200/50 dark:border-slate-700/50 transition-all duration-300 hover:shadow-xl">
+        <div className="flex flex-col justify-between p-6 transition-all duration-300 border shadow-lg rounded-xl sm:flex-row sm:items-center bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl">
           <div className="flex items-center gap-5">
-            <div className="w-15 h-15 shrink-0 flex items-center justify-center bg-gradient-to-br from-cyan-500 to-sky-500 rounded-2xl shadow-lg shadow-cyan-500/20">
-              <FiPackage className="w-7 h-7 text-white" strokeWidth={2} />
+            <div className="flex items-center justify-center rounded-lg shadow-lg w-15 h-15 shrink-0 bg-gradient-to-br from-cyan-500 to-sky-500 shadow-cyan-500/20">
+              <FiPackage className="text-white w-7 h-7" strokeWidth={2} />
             </div>
             <div className="flex flex-col justify-center pt-1">
               <span className="text-[11px] font-bold tracking-[0.25em] text-sky-500 dark:text-sky-400 uppercase mb-1">
@@ -210,7 +223,7 @@ export default function Products() {
           </div>
           <button
             onClick={() => navigate("/add-product")}
-            className="flex cursor-pointer items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600 active:scale-95 text-white text-[15px] font-semibold rounded-2xl transition-all shadow-lg shadow-cyan-500/30"
+            className="flex cursor-pointer items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600 active:scale-95 text-white text-[15px] font-semibold rounded-lg transition-all shadow-lg shadow-cyan-500/30"
           >
             <FiPlus className="w-5 h-5 stroke-[2.5]" />
             {t("products.addProduct")}
@@ -244,23 +257,23 @@ export default function Products() {
           />
         </div>
 
-        <div className="rounded-3xl p-5 lg:p-6 shadow-lg border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 transition-all duration-300 hover:shadow-xl">
+        <div className="p-5 transition-all duration-300 border shadow-lg rounded-xl lg:p-6 border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 hover:shadow-xl">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <div className="relative flex-1 group">
-              <FiSearch className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-cyan-500 w-5 h-5 transition-colors" />
+              <FiSearch className="absolute w-5 h-5 transition-colors -translate-y-1/2 left-5 top-1/2 text-slate-400 group-focus-within:text-cyan-500" />
               <input
                 type="text"
                 placeholder={t("products.searchPlaceholder")}
                 value={filters.search}
                 onChange={(e) => updateFilter("search", e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && applyFilters()}
-                className="h-13 w-full rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50 pl-12 pr-4 text-[15px] text-slate-900 dark:text-white outline-none transition-all focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 placeholder:text-slate-400 backdrop-blur-sm"
+                className="h-13 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50 pl-12 pr-4 text-[15px] text-slate-900 dark:text-white outline-none transition-all focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 placeholder:text-slate-400 backdrop-blur-sm"
               />
             </div>
             <div className="flex gap-3">
               <button
                 onClick={() => setFiltersOpen(!filtersOpen)}
-                className={`flex h-13 cursor-pointer items-center justify-center gap-2 rounded-2xl border px-6 text-[15px] font-semibold transition-all ${
+                className={`flex h-13 cursor-pointer items-center justify-center gap-2 rounded-lg border px-6 text-[15px] font-semibold transition-all ${
                   filtersOpen
                     ? "border-cyan-500 bg-cyan-50 text-cyan-600 dark:border-cyan-500/50 dark:bg-cyan-500/20 dark:text-cyan-400"
                     : "border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 backdrop-blur-sm"
@@ -271,7 +284,7 @@ export default function Products() {
               </button>
               <button
                 onClick={applyFilters}
-                className="flex h-13 cursor-pointer items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600 px-8 text-[15px] font-semibold text-white transition-all shadow-lg shadow-cyan-500/30"
+                className="flex h-13 cursor-pointer items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600 px-8 text-[15px] font-semibold text-white transition-all shadow-lg shadow-cyan-500/30"
               >
                 {t("products.search")}
               </button>
@@ -282,12 +295,12 @@ export default function Products() {
             className={`grid transition-all duration-300 ease-in-out ${filtersOpen ? "grid-rows-[1fr] opacity-100 mt-5" : "grid-rows-[0fr] opacity-0"}`}
           >
             <div className="overflow-hidden">
-              <div className="grid grid-cols-1 gap-5 border-t border-slate-200/50 dark:border-slate-700/50 pt-6 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-5 pt-6 border-t border-slate-200/50 dark:border-slate-700/50 sm:grid-cols-2">
                 <FilterField label={t("products.category")} icon={<FiLayers />}>
                   <select
                     value={filters.category}
                     onChange={(e) => updateFilter("category", e.target.value)}
-                    className="h-[52px] w-full rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50 px-4 text-[15px] text-slate-700 dark:text-white outline-none transition-colors hover:border-slate-300 dark:hover:border-slate-600 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 backdrop-blur-sm"
+                    className="h-[52px] w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50 px-4 text-[15px] text-slate-700 dark:text-white outline-none transition-colors hover:border-slate-300 dark:hover:border-slate-600 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 backdrop-blur-sm"
                   >
                     <option value="">{t("products.allCategories")}</option>
                     {categories.map((c) => (
@@ -306,7 +319,7 @@ export default function Products() {
                     onChange={(e) =>
                       updateFilter("subcategory", e.target.value)
                     }
-                    className="h-13 w-full rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50 px-4 text-[15px] text-slate-700 dark:text-white outline-none transition-colors hover:border-slate-300 dark:hover:border-slate-600 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 placeholder:text-slate-400 backdrop-blur-sm"
+                    className="h-13 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50 px-4 text-[15px] text-slate-700 dark:text-white outline-none transition-colors hover:border-slate-300 dark:hover:border-slate-600 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 placeholder:text-slate-400 backdrop-blur-sm"
                   />
                 </FilterField>
               </div>
@@ -315,7 +328,7 @@ export default function Products() {
         </div>
 
         {error && (
-          <div className="rounded-2xl border border-rose-200 dark:border-rose-800/50 bg-rose-50 dark:bg-rose-950/30 p-5 text-[15px] font-medium text-rose-700 dark:text-rose-400">
+          <div className="rounded-xl border border-rose-200 dark:border-rose-800/50 bg-rose-50 dark:bg-rose-950/30 p-5 text-[15px] font-medium text-rose-700 dark:text-rose-400">
             {error}
           </div>
         )}
@@ -342,17 +355,17 @@ export default function Products() {
                 <button
                   disabled={page === 1}
                   onClick={() => setPage((p) => p - 1)}
-                  className="w-10 h-10 flex cursor-pointer items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 disabled:opacity-50 backdrop-blur-sm transition-all"
+                  className="flex items-center justify-center w-10 h-10 transition-all border rounded-lg cursor-pointer border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 disabled:opacity-50 backdrop-blur-sm"
                 >
                   <FiChevronLeft />
                 </button>
-                <span className="text-sm font-semibold text-slate-600 dark:text-slate-400 px-4">
+                <span className="px-4 text-sm font-semibold text-slate-600 dark:text-slate-400">
                   {t("products.page")} {page} {t("products.of")} {totalPages}
                 </span>
                 <button
                   disabled={page === totalPages}
                   onClick={() => setPage((p) => p + 1)}
-                  className="w-10 h-10 flex cursor-pointer items-center justify-center rounded-xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 disabled:opacity-50 backdrop-blur-sm transition-all"
+                  className="flex items-center justify-center w-10 h-10 transition-all border rounded-lg cursor-pointer border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 disabled:opacity-50 backdrop-blur-sm"
                 >
                   <FiChevronRight />
                 </button>
@@ -360,11 +373,11 @@ export default function Products() {
             )}
           </>
         ) : (
-          <div className="flex flex-col items-center justify-center py-20 rounded-3xl border border-dashed border-slate-200 dark:border-slate-700 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30">
-            <div className="w-20 h-20 flex items-center justify-center rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500 mb-4">
+          <div className="flex flex-col items-center justify-center py-20 border border-dashed rounded-lg border-slate-200 dark:border-slate-700 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30">
+            <div className="flex items-center justify-center w-20 h-20 mb-4 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500">
               <FiPackage size={32} />
             </div>
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
+            <h3 className="mb-2 text-xl font-bold text-slate-900 dark:text-white">
               {t("products.noProducts")}
             </h3>
             <p className="text-slate-500 dark:text-slate-400">
@@ -375,16 +388,16 @@ export default function Products() {
       </div>
 
       {deleteModalOpen && userToDelete && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 backdrop-blur-sm">
-          <div className="bg-gradient-to-br from-white to-sky-200  dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 rounded-2xl p-6 w-full max-w-md mx-4 shadow-2xl border border-slate-200/50 dark:border-slate-700/50">
-            <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-2">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <div className="w-full max-w-md p-6 mx-4 border rounded-lg shadow-2xl bg-gradient-to-br from-white to-sky-200 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 border-slate-200/50 dark:border-slate-700/50">
+            <h3 className="mb-2 text-xl font-bold text-slate-800 dark:text-white">
               {t("products.delete")}
             </h3>
-            <p className="text-slate-600 dark:text-slate-300 mb-6">
-              {t("users.deleteConfirm")}{" "}
-              <strong>{userToDelete.name}</strong>{t("users.cannotUndo")}
+            <p className="mb-6 text-slate-600 dark:text-slate-300">
+              {t("users.deleteConfirm")} <strong>{userToDelete.name}</strong>
+              {t("users.cannotUndo")}
             </p>
-            <div className="flex gap-3 justify-end">
+            <div className="flex justify-end gap-3">
               <button
                 onClick={handleCancelDelete}
                 className="px-6 py-2.5 text-sm font-bold rounded-lg cursor-pointer text-slate-600 hover:text-slate-800 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 dark:text-slate-300 dark:hover:text-white dark:bg-slate-800 dark:hover:bg-slate-700 dark:border-slate-700 dark:hover:border-slate-600 transition-all duration-200 shadow-sm hover:shadow"
@@ -432,10 +445,10 @@ function StatCard({ icon, value, label, tone, className = "" }) {
 
   return (
     <div
-      className={`flex flex-col rounded-2xl border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${className}`}
+      className={`flex flex-col rounded-xl border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${className}`}
     >
       <div
-        className={`mb-5 flex h-12 w-12 items-center justify-center rounded-2xl text-xl ${tones[tone]}`}
+        className={`mb-5 flex h-12 w-12 items-center justify-center rounded-lg text-xl ${tones[tone]}`}
       >
         {icon}
       </div>
@@ -469,32 +482,34 @@ function ProductCard({ product, isDeleting, onDelete, onQuickEdit }) {
 
   return (
     <div
-      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${isDeleting ? "opacity-60 grayscale" : ""}`}
+      className={`group relative flex flex-col overflow-hidden rounded-xl border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${isDeleting ? "opacity-60 grayscale" : ""}`}
     >
-      <div className="relative aspect-4/3 w-full shrink-0 overflow-hidden bg-slate-50 dark:bg-slate-950">
+      <div className="relative w-full overflow-hidden aspect-4/3 shrink-0 bg-slate-50 dark:bg-slate-950">
         <ImageSlider
           images={product.images?.map((img) => img.url || img)}
           altText={product.name}
         />
 
         {product.featured && (
-          <div className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-amber-400 to-orange-500 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white shadow-lg shadow-amber-500/30 z-10">
+          <div className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-amber-400 to-orange-500 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white shadow-lg shadow-amber-500/30 z-10">
             <FiStar size={12} className="fill-white" /> {t("products.featured")}
           </div>
         )}
 
         <div
-          className={`absolute bottom-4 right-4 rounded-xl px-3 py-1.5 text-[12px] font-bold shadow-lg z-10 ${
+          className={`absolute bottom-4 right-4 rounded-lg px-3 py-1.5 text-[12px] font-bold shadow-lg z-10 ${
             stock > 0
               ? "bg-gradient-to-r from-emerald-500 to-green-500 text-white shadow-lg shadow-emerald-500/30"
               : "bg-gradient-to-r from-rose-500 to-red-500 text-white shadow-lg shadow-rose-500/30"
           }`}
         >
-          {stock > 0 ? `${stock} ${t("products.inStockCount")}` : t("products.outOfStock")}
+          {stock > 0
+            ? `${stock} ${t("products.inStockCount")}`
+            : t("products.outOfStock")}
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col px-6 pb-6 pt-5">
+      <div className="flex flex-col flex-1 px-6 pt-5 pb-6">
         <Link
           to={`/products/${product._id}`}
           className="text-[19px] font-extrabold text-slate-900 dark:text-white transition-colors hover:text-cyan-500 line-clamp-1"
@@ -514,7 +529,7 @@ function ProductCard({ product, isDeleting, onDelete, onQuickEdit }) {
             t("products.noDescription")}
         </p>
 
-        <div className="mt-auto pt-5">
+        <div className="pt-5 mt-auto">
           <div className="flex items-baseline gap-2">
             <span className="text-[32px] font-black tracking-tight text-slate-900 dark:text-white">
               {(Number(product.price) || 0).toFixed(0)}{" "}
@@ -540,7 +555,7 @@ function ProductCard({ product, isDeleting, onDelete, onQuickEdit }) {
             {product.tags?.map((tag, index) => (
               <span
                 key={`${tag}-${index}`}
-                className="rounded-xl border border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 px-3 py-1 text-[12px] font-medium text-slate-600 dark:text-slate-300 backdrop-blur-sm"
+                className="rounded-lg border border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 px-3 py-1 text-[12px] font-medium text-slate-600 dark:text-slate-300 backdrop-blur-sm"
               >
                 {tag}
               </span>
@@ -548,37 +563,39 @@ function ProductCard({ product, isDeleting, onDelete, onQuickEdit }) {
           </div>
         </div>
 
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200/50 dark:border-slate-700/50 pt-5">
-          <div className="flex flex-wrap gap-2">
+        <div className="flex flex-col items-center justify-center gap-2 pt-5 mt-6 border-t border-slate-300 dark:border-slate-700">
+          <div className="flex flex-wrap flex-1 w-full gap-3">
             <ActionBtn
               icon={<FiEye />}
               label={t("products.view")}
               to={`/products/${product._id}`}
+              className="flex items-center justify-center flex-1"
             />
             <ActionBtn
               icon={<FiEdit2 />}
               label={t("products.edit")}
               to={`/products/${product._id}/edit`}
+              className="flex items-center justify-center flex-1"
             />
-
+          </div>
+          <div className="flex flex-wrap flex-1 w-full gap-3">
             <button
               type="button"
               onClick={onQuickEdit}
-              className="flex cursor-pointer items-center gap-1.5 rounded-xl border border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 px-3.5 py-2 text-[12px] font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-700/50 backdrop-blur-sm"
+              className="flex items-center justify-center flex-1 cursor-pointer  gap-1.5 rounded-lg border border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 px-3.5 py-2 text-[12px] font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-700/50 backdrop-blur-sm"
             >
               <FiSliders size={14} /> {t("products.quickEdit")}
             </button>
+            <button
+              type="button"
+              disabled={isDeleting}
+              onClick={onDelete}
+              className="flex items-center justify-center flex-1 cursor-pointer items-center gap-1.5 rounded-lg border border-rose-200 dark:border-rose-800/50 bg-rose-50 dark:bg-rose-950/30 px-3.5 py-2 text-[12px] font-semibold text-rose-600 dark:text-rose-400 transition-all hover:bg-rose-100 dark:hover:bg-rose-950/50 disabled:opacity-50"
+            >
+              <FiTrash2 size={14} />
+              <span>{isDeleting ? "..." : t("products.delete")}</span>
+            </button>
           </div>
-
-          <button
-            type="button"
-            disabled={isDeleting}
-            onClick={onDelete}
-            className="flex cursor-pointer items-center gap-1.5 rounded-xl border border-rose-200 dark:border-rose-800/50 bg-rose-50 dark:bg-rose-950/30 px-3.5 py-2 text-[12px] font-semibold text-rose-600 dark:text-rose-400 transition-all hover:bg-rose-100 dark:hover:bg-rose-950/50 disabled:opacity-50"
-          >
-            <FiTrash2 size={14} />
-            <span>{isDeleting ? "..." : t("products.delete")}</span>
-          </button>
         </div>
       </div>
     </div>
@@ -594,7 +611,7 @@ function ActionBtn({ icon, label, to, className = "" }) {
   );
 
   const baseClass =
-    "flex items-center gap-1.5 rounded-xl border border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 px-3.5 py-2 text-[12px] font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-700/50 shadow-sm backdrop-blur-sm " +
+    "flex items-center gap-1.5 rounded-lg border border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 px-3.5 py-2 text-[12px] font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-700/50 shadow-sm backdrop-blur-sm " +
     className;
 
   if (to) {
@@ -645,7 +662,7 @@ function ImageSlider({ images, altText }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className="flex h-full w-full transition-transform duration-500 ease-in-out"
+        className="flex w-full h-full transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {displayImages.map((src, idx) => (
@@ -653,7 +670,7 @@ function ImageSlider({ images, altText }) {
             key={idx}
             src={src}
             alt={`${altText} - ${idx}`}
-            className="w-full h-full object-cover shrink-0"
+            className="object-cover w-full h-full shrink-0"
           />
         ))}
       </div>
@@ -662,13 +679,13 @@ function ImageSlider({ images, altText }) {
         <>
           <button
             onClick={goToPrev}
-            className="absolute cursor-pointer left-3 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full bg-white/90 text-slate-800 shadow-sm hover:bg-white hover:scale-105 transition-all z-20"
+            className="absolute z-20 flex items-center justify-center w-8 h-8 transition-all -translate-y-1/2 rounded-full shadow-sm cursor-pointer left-3 top-1/2 bg-white/90 text-slate-800 hover:bg-white hover:scale-105"
           >
             <FiChevronLeft size={16} />
           </button>
           <button
             onClick={goToNext}
-            className="absolute cursor-pointer right-3 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-full bg-white/90 text-slate-800 shadow-sm hover:bg-white hover:scale-105 transition-all z-20"
+            className="absolute z-20 flex items-center justify-center w-8 h-8 transition-all -translate-y-1/2 rounded-full shadow-sm cursor-pointer right-3 top-1/2 bg-white/90 text-slate-800 hover:bg-white hover:scale-105"
           >
             <FiChevronRight size={16} />
           </button>

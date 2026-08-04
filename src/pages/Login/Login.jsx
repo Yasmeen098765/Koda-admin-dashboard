@@ -10,7 +10,7 @@ import { useState } from "react";
 import api from "../../api/api.jsx";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import { LuLoaderCircle } from "react-icons/lu";
+import { LuEye, LuEyeOff, LuLoaderCircle } from "react-icons/lu";
 import { useLanguage } from "../../Context/LanguageContext";
 
 function Login() {
@@ -21,7 +21,7 @@ function Login() {
     email: "",
     password: "",
   });
-
+  const [showPassword, setShowPassword] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setCredentials((prev) => ({ ...prev, [name]: value }));
@@ -70,11 +70,11 @@ function Login() {
           <div className="loginMain flex justify-center items-center mx-auto w-[90%] min-[270px]:w-[80%] min-[500px]:w-[90%] min-[630px]:w-[80%] min-[800px]:w-[80%] min-[850px]:w-[75%] min-[900px]:w-[70%] min-[950px]:w-[65%] min-[1024px]:w-full">
             <div className="w-full shadow-xs shadow-sky-100 grid overflow-hidden rounded-2xl min-[500px]:rounded-[32px] border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-2xl grid-cols-1 lg:grid-cols-2">
               {/* الجانب الأيسر - المعلومات */}
-              <div className="hidden lg:flex flex-col justify-center p-12 bg-gradient-to-br from-blue-600 to-cyan-500 text-white">
+              <div className="flex-col justify-center hidden p-12 text-white lg:flex bg-gradient-to-br from-blue-600 to-cyan-500">
                 <div className="max-w-md">
-                  <div className="mb-6 flex items-center gap-3">
+                  <div className="flex items-center gap-3 mb-6">
                     <FiShoppingBag className="text-[32px] min-[1200px]:text-[40px]" />
-                    <h2 className=" text-3xl font-bold">{t("login.title")}</h2>
+                    <h2 className="text-3xl font-bold ">{t("login.title")}</h2>
                   </div>
                   <h1 className="text-4xl min-[1200px]:text-5xl font-bold leading-tight">
                     {t("login.heading")}
@@ -143,7 +143,7 @@ function Login() {
                     <div className="relative">
                       <IoLockClosedOutline className="absolute left-2.5 min-[500px]:left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm min-[500px]:text-xl" />
                       <input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         name="password"
                         value={credentials.password}
                         onChange={handleChange}
@@ -151,6 +151,17 @@ function Login() {
                         className="text-xs min-[500px]:text-[16px] w-full rounded-lg min-[500px]:rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 py-2.5 min-[500px]:py-3 pl-7 min-[500px]:pl-11 pr-2 min-[500px]:pr-4 text-slate-900 dark:text-white outline-none transition-all duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:focus:ring-blue-400/20"
                         required
                       />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute text-gray-500 -translate-y-1/2 right-3 top-1/2 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                      >
+                        {showPassword ? (
+                          <LuEyeOff className="w-4 h-4" />
+                        ) : (
+                          <LuEye className="w-4 h-4" />
+                        )}
+                      </button>
                     </div>
                   </div>
 
@@ -162,8 +173,8 @@ function Login() {
                     type="submit"
                   >
                     {loading ? (
-                      <div className="flex gap-2 items-center justify-center">
-                        <LuLoaderCircle className="animate-spin text-lg" />
+                      <div className="flex items-center justify-center gap-2">
+                        <LuLoaderCircle className="text-lg animate-spin" />
                         <span>{t("login.signingIn")}</span>
                       </div>
                     ) : (
@@ -172,12 +183,12 @@ function Login() {
                   </button>
 
                   {/* الفاصل */}
-                  <div className="my-6 flex items-center">
-                    <div className="h-px flex-1 bg-slate-300 dark:bg-slate-700"></div>
+                  <div className="flex items-center my-6">
+                    <div className="flex-1 h-px bg-slate-300 dark:bg-slate-700"></div>
                     <span className="px-4 text-xs min-[500px]:text-sm text-slate-500">
                       {t("login.or")}
                     </span>
-                    <div className="h-px flex-1 bg-slate-300 dark:bg-slate-700"></div>
+                    <div className="flex-1 h-px bg-slate-300 dark:bg-slate-700"></div>
                   </div>
 
                   {/* زر Google */}
