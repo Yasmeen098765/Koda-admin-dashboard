@@ -26,16 +26,33 @@ export default function Slider({ images }) {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <Swiper
         loop={Products.length > 4}
-        spaceBetween={10}
+        spaceBetween={8}
         autoplay={{ delay: 2000, disableOnInteraction: false }}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[Autoplay, FreeMode, Thumbs]}
-        className="p-4 mb-4 border shadow-sm bg-wxlhite rounded-xl border-slate-200 dark:border-slate-800 dark:bg-slate-900"
+        className="p-2 xs:p-3 sm:p-4 mb-3 xs:mb-4 border shadow-sm rounded-xl border-slate-200 dark:border-slate-800 dark:bg-slate-900"
         onSwiper={(swiper) => {
           mainSwiperRef.current = swiper;
+        }}
+        breakpoints={{
+          320: {
+            spaceBetween: 6,
+          },
+          375: {
+            spaceBetween: 8,
+          },
+          640: {
+            spaceBetween: 10,
+          },
+          768: {
+            spaceBetween: 12,
+          },
+          1024: {
+            spaceBetween: 15,
+          },
         }}
       >
         {imageList.map((imageUrl, index) => (
@@ -43,7 +60,7 @@ export default function Slider({ images }) {
             <img
               src={imageUrl}
               alt={`Product ${index + 1}`}
-              className="object-contain w-full cursor-pointer h-100 rounded-xl"
+              className="object-contain w-full cursor-pointer h-32 sm:h-48 md:h-52 lg:h-60 rounded-md sm:rounded-lg transition-transform hover:scale-105"
             />
           </SwiperSlide>
         ))}
@@ -54,22 +71,49 @@ export default function Slider({ images }) {
           setThumbsSwiper(swiper);
         }}
         loop={true}
-        spaceBetween={20}
-        slidesPerView={4}
+        spaceBetween={8}
+        slidesPerView="auto"
         freeMode={true}
         watchSlidesProgress={true}
-        modules={[FreeMode, Thumbs]}
-        className="p-4 thumbs-slider"
+        autoplay={{ delay: 2000, disableOnInteraction: false }}
+        modules={[FreeMode, Thumbs, Autoplay]}
+        className="p-2 mt-3  sm:mt-6 xs:p-3 sm:p-4 thumbs-slider h-32 min-[600px]:h-40 min-[800px]:h-40 min-[1024px]:h-44   "
+        breakpoints={{
+          0: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          320: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
+          375: {
+            slidesPerView: 3,
+            spaceBetween: 10,
+          },
+          480: {
+            slidesPerView: 3,
+            spaceBetween: 10,
+          },
+          640: {
+            slidesPerView: 3,
+            spaceBetween: 12,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 15,
+          },
+        }}
       >
         {imageList.map((imageUrl, index) => (
           <SwiperSlide
             key={`thumb-${index}`}
-            className="bg-white shadow-sm rounded-xl dark:bg-slate-800"
+            className="relative bg-white shadow-sm  rounded-md sm:rounded-lg dark:bg-slate-800 "
           >
             <img
               src={imageUrl}
               alt={`Thumbnail ${index + 1}`}
-              className="h-37.5 w-full rounded-2xl object-cover cursor-pointer"
+              className="relative  w-full h-full  rounded-md sm:rounded-lg object-cover cursor-pointer transition-all hover:scale-105 hover:shadow-md"
             />
           </SwiperSlide>
         ))}

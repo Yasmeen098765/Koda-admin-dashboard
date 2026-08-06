@@ -168,6 +168,7 @@ const translations = {
     "productDetails.loading": "Loading product...",
     "productDetails.notFound": "Product Not Found",
     "productDetails.save": "Save",
+    "productDetails.noReviews": "No Reviews",
 
     // Users page
     "users.management": "User Management",
@@ -525,6 +526,7 @@ const translations = {
     "productDetails.loading": "جاري تحميل المنتج...",
     "productDetails.notFound": "المنتج غير موجود",
     "productDetails.save": "حفظ",
+    "productDetails.noReviews": "لا يوجد تقييمات",
 
     // Users page
     "users.management": "إدارة المستخدمين",

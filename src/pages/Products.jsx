@@ -205,32 +205,35 @@ export default function Products() {
   }
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 lg:p-8 text-slate-900 bg-slate-50 dark:bg-slate-900 dark:text-slate-200">
+    <div className="min-h-screen px-4 py-6 sm:p-6 lg:p-8 text-slate-900 bg-slate-50 dark:bg-slate-900 dark:text-slate-200">
       <div className="slide-up mx-auto max-w-[1600px] space-y-6 lg:space-y-8">
-        <div className="flex flex-col justify-between p-6 transition-all duration-300 border shadow-lg rounded-xl sm:flex-row sm:items-center bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl">
-          <div className="flex items-center gap-5">
-            <div className="flex items-center justify-center rounded-lg shadow-lg w-15 h-15 shrink-0 bg-gradient-to-br from-cyan-500 to-sky-500 shadow-cyan-500/20">
-              <FiPackage className="text-white w-7 h-7" strokeWidth={2} />
+        <div className="flex flex-col items-start justify-between p-3 min-[400px]:p-6 transition-all duration-300 border shadow-lg rounded-xl sm:flex-row sm:items-center bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl">
+          <div className="flex items-start gap-2 min-[400px]:gap-5">
+            <div className="flex items-center justify-center rounded-lg shadow-lg w-10  min-[400px]:w-12 min-[640px]:w-15 h-10 min-[400px]:h-12 min-[640px]:h-15  shrink-0 bg-gradient-to-br from-cyan-500 to-sky-500 shadow-cyan-500/20">
+              <FiPackage
+                className="text-white w-6 h-6 min-[400px]:w-7 min-[400px]:h-7"
+                strokeWidth={2}
+              />
             </div>
-            <div className="flex flex-col justify-center pt-1">
-              <span className="text-[11px] font-bold tracking-[0.25em] text-sky-500 dark:text-sky-400 uppercase mb-1">
+            <div className="flex flex-col justify-center mb-6">
+              <span className="text-[8px]  min-[270px]:text-[10px] min-[400px]:text-sm font-bold tracking-[0.25em] text-sky-500 dark:text-sky-400 uppercase  mb-1">
                 {t("products.dashboard")}
               </span>
-              <h1 className="text-[32px] leading-none font-black text-slate-900 dark:text-white tracking-tight">
+              <h1 className="text-sm  min-[400px]:text-xl  min-[500px]:text-2xl  min-[640px]:text-[29px] leading-none font-black text-slate-900 dark:text-white tracking-tight">
                 {t("products.title")}
               </h1>
             </div>
           </div>
           <button
             onClick={() => navigate("/add-product")}
-            className="flex cursor-pointer items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600 active:scale-95 text-white text-[15px] font-semibold rounded-lg transition-all shadow-lg shadow-cyan-500/30"
+            className="flex text-sm min-[400px]:text-[15px] cursor-pointer items-center justify-center gap-2 px-3 min-[400px]:px-6 py-2.5 min-[400px]:py-3.5 bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600 active:scale-95 text-white  font-semibold rounded-lg transition-all shadow-lg shadow-cyan-500/30"
           >
-            <FiPlus className="w-5 h-5 stroke-[2.5]" />
+            <FiPlus className="w-4 h-4  min-[400px]:w-5 min-[400px]:h-5 stroke-[2.5]" />
             {t("products.addProduct")}
           </button>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+        <div className="grid grid-cols-1 gap-4 min-[270px]:grid-cols-2 min-[700px]:grid-cols-4 lg:gap-6">
           <StatCard
             icon={<FiBox />}
             value={stats.total}
@@ -257,34 +260,34 @@ export default function Products() {
           />
         </div>
 
-        <div className="p-5 transition-all duration-300 border shadow-lg rounded-xl lg:p-6 border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 hover:shadow-xl">
+        <div className=" transition-all duration-300 border shadow-lg rounded-xl px-3 py-4 min-[400px]:p-6 border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 hover:shadow-xl">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <div className="relative flex-1 group">
-              <FiSearch className="absolute w-5 h-5 transition-colors -translate-y-1/2 left-5 top-1/2 text-slate-400 group-focus-within:text-cyan-500" />
+              <FiSearch className="absolute  w-4 h-4 min-[400px]:w-5 min-[400px]:h-5 transition-colors -translate-y-1/2 left-4 min-[400px]:left-5 top-1/2 text-slate-700 z-[1] group-focus-within:text-cyan-500" />
               <input
                 type="text"
                 placeholder={t("products.searchPlaceholder")}
                 value={filters.search}
                 onChange={(e) => updateFilter("search", e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && applyFilters()}
-                className="h-13 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50 pl-12 pr-4 text-[15px] text-slate-900 dark:text-white outline-none transition-all focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 placeholder:text-slate-400 backdrop-blur-sm"
+                className="h-10  min-[400px]:h-13 z-[-1] w-full  rounded-md min-[400px]:rounded-lg border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50  pl-10 min-[400px]:pl-12  pr-2 min-[400px]:pr-4 text-xs min-[400px]:text-[15px] text-slate-900 dark:text-white outline-none transition-all focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 placeholder:text-slate-400 backdrop-blur-sm"
               />
             </div>
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
               <button
                 onClick={() => setFiltersOpen(!filtersOpen)}
-                className={`flex h-13 cursor-pointer items-center justify-center gap-2 rounded-lg border px-6 text-[15px] font-semibold transition-all ${
+                className={`flex flex-1  min-[400px]:flex-0 h-10 min-[400px]:h-13 cursor-pointer items-center justify-center gap-2 rounded-lg border px-3 min-[400px]:px-6  text-xs min-[400px]:text-sm  min-[500px]:text-[15px] font-semibold transition-all ${
                   filtersOpen
                     ? "border-cyan-500 bg-cyan-50 text-cyan-600 dark:border-cyan-500/50 dark:bg-cyan-500/20 dark:text-cyan-400"
                     : "border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700/50 backdrop-blur-sm"
                 }`}
               >
-                <FiSliders className="w-4 h-4" />
+                <FiSliders className=" w-3 h-3 min-[400px]:w-4 min-[400px]:h-4" />
                 {t("products.filters")}
               </button>
               <button
                 onClick={applyFilters}
-                className="flex h-13 cursor-pointer items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600 px-8 text-[15px] font-semibold text-white transition-all shadow-lg shadow-cyan-500/30"
+                className="flex flex-1  min-[400px]:flex-0  h-10 min-[400px]:h-13 cursor-pointer items-center justify-center  gap-1 min-[400px]:gap-2 rounded-lg bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600  px-4 min-[400px]:px-8 text-xs  min-[400px]:text-sm min-[500px]:text-[15px] font-semibold text-white transition-all shadow-lg shadow-cyan-500/30"
               >
                 {t("products.search")}
               </button>
@@ -300,7 +303,7 @@ export default function Products() {
                   <select
                     value={filters.category}
                     onChange={(e) => updateFilter("category", e.target.value)}
-                    className="h-[52px] w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50 px-4 text-[15px] text-slate-700 dark:text-white outline-none transition-colors hover:border-slate-300 dark:hover:border-slate-600 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 backdrop-blur-sm"
+                    className="h-10 min-[400px]:h-[52px] w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50  px-3 min-[400px]:px-4  text-xs min-[400px]:text-sm min-[500px]:text-[15px] text-slate-700 dark:text-white outline-none transition-colors hover:border-slate-300 dark:border-slate-600 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 backdrop-blur-sm"
                   >
                     <option value="">{t("products.allCategories")}</option>
                     {categories.map((c) => (
@@ -319,7 +322,7 @@ export default function Products() {
                     onChange={(e) =>
                       updateFilter("subcategory", e.target.value)
                     }
-                    className="h-13 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50 px-4 text-[15px] text-slate-700 dark:text-white outline-none transition-colors hover:border-slate-300 dark:hover:border-slate-600 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 placeholder:text-slate-400 backdrop-blur-sm"
+                    className="h-10  min-[400px]:h-13 w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-800/50 px-3 min-[400px]:px-4  text-xs min-[400px]:text-sm min-[500px]:text-[15px] text-slate-700 dark:text-white outline-none transition-colors hover:border-slate-300 dark:border-slate-600 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 placeholder:text-slate-400 backdrop-blur-sm"
                   />
                 </FilterField>
               </div>
@@ -328,14 +331,14 @@ export default function Products() {
         </div>
 
         {error && (
-          <div className="rounded-xl border border-rose-200 dark:border-rose-800/50 bg-rose-50 dark:bg-rose-950/30 p-5 text-[15px] font-medium text-rose-700 dark:text-rose-400">
+          <div className="rounded-lg min-[400px]:rounded-xl border border-rose-200 dark:border-rose-800/50 bg-rose-50 dark:bg-rose-950/30 p-4  min-[400px]:p-5 text-xs min-[400px]:text-sm min-[500px]:text-[15px] font-medium text-rose-700 dark:text-rose-400">
             {error}
           </div>
         )}
 
         {products.length > 0 ? (
           <>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 min-[500px]:grid-cols-2 min-[920px]:grid-cols-3 min-[1024px]:grid-cols-2 min-[1200px]:grid-cols-3">
               {products.map((product) => (
                 <ProductCard
                   key={product._id}
@@ -388,28 +391,31 @@ export default function Products() {
       </div>
 
       {deleteModalOpen && userToDelete && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="w-full max-w-md p-6 mx-4 border rounded-lg shadow-2xl bg-gradient-to-br from-white to-sky-200 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 border-slate-200/50 dark:border-slate-700/50">
-            <h3 className="mb-2 text-xl font-bold text-slate-800 dark:text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm">
+          <div className="w-full max-w-md p-4 mx-auto border rounded-lg shadow-2xl sm:p-6 bg-gradient-to-br from-white to-sky-200 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 border-slate-200/50 dark:border-slate-700/50">
+            <h3 className="mb-2 font-bold text-md sm:text-xl text-slate-800 dark:text-white">
               {t("products.delete")}
             </h3>
-            <p className="mb-6 text-slate-600 dark:text-slate-300">
-              {t("users.deleteConfirm")} <strong>{userToDelete.name}</strong>
+            <p className="mb-4 text-sm sm:mb-6 sm:text-base text-slate-600 dark:text-slate-300">
+              {t("users.deleteConfirm")}{" "}
+              <strong className="break-words">{userToDelete.name}</strong>
               {t("users.cannotUndo")}
             </p>
-            <div className="flex justify-end gap-3">
+            <div className="flex flex-col-reverse justify-end gap-2 min-[400px]:flex-row min-[400px]:gap-3">
               <button
                 onClick={handleCancelDelete}
-                className="px-6 py-2.5 text-sm font-bold rounded-lg cursor-pointer text-slate-600 hover:text-slate-800 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 dark:text-slate-300 dark:hover:text-white dark:bg-slate-800 dark:hover:bg-slate-700 dark:border-slate-700 dark:hover:border-slate-600 transition-all duration-200 shadow-sm hover:shadow"
+                className="w-full sm:w-auto px-4 sm:px-6  py-2 min-[400px]:py-2.5 text-xs min-[400px]:text-sm font-bold rounded-md min-[400px]:rounded-lg cursor-pointer text-slate-600 hover:text-slate-800 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 dark:text-slate-300 dark:hover:text-white dark:bg-slate-800 dark:hover:bg-slate-700 dark:border-slate-700 dark:hover:border-slate-600 transition-all duration-200 shadow-sm hover:shadow order-2 sm:order-1"
               >
                 {t("users.cancelBtn")}
               </button>
               <button
                 onClick={handleConfirmDelete}
                 disabled={deleting}
-                className="px-6 py-2.5 text-sm font-bold rounded-lg cursor-pointer bg-gradient-to-r from-rose-500 to-red-500 text-white hover:from-rose-600 hover:to-red-600 transition-all flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-50 select-none shadow-lg shadow-rose-500/30 hover:shadow-xl hover:shadow-rose-500/40"
+                className="w-full sm:w-auto px-4 sm:px-6 py-2 min-[400px]:py-2.5 text-xs min-[400px]:text-sm font-bold rounded-md min-[400px]:rounded-lg cursor-pointer bg-gradient-to-r from-rose-500 to-red-500 text-white hover:from-rose-600 hover:to-red-600 transition-all flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-50 select-none shadow-lg shadow-rose-500/30 hover:shadow-xl hover:shadow-rose-500/40 order-1 sm:order-2"
               >
-                {deleting && <FiLoader className="w-4 h-4 animate-spin" />}
+                {deleting && (
+                  <FiLoader className="flex-shrink-0 w-4 h-4 animate-spin" />
+                )}
                 {t("users.deleteBtn")}
               </button>
             </div>
@@ -445,14 +451,14 @@ function StatCard({ icon, value, label, tone, className = "" }) {
 
   return (
     <div
-      className={`flex flex-col rounded-xl border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${className}`}
+      className={`flex flex-col rounded-xl border border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-br from-white via-sky-50/80 to-blue-100/40 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 p-3 min-[400px]:p-6 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${className}`}
     >
       <div
-        className={`mb-5 flex h-12 w-12 items-center justify-center rounded-lg text-xl ${tones[tone]}`}
+        className={`mb-3 min-[400px]:mb-5 flex h-8 w-8 min-[400px]:h-12 min-[400px]:w-12 items-center justify-center rounded-lg text-xl ${tones[tone]}`}
       >
         {icon}
       </div>
-      <h3 className="text-[32px] font-black tracking-tight text-slate-900 dark:text-white leading-none">
+      <h3 className="text-xl min-[400px]:text-2xl  min-[500px]:text-[32px] font-black tracking-tight text-slate-900 dark:text-white leading-none">
         {value}
       </h3>
       <p className="mt-2 text-[14px] font-medium text-slate-500 dark:text-slate-400">
@@ -464,8 +470,8 @@ function StatCard({ icon, value, label, tone, className = "" }) {
 
 function FilterField({ label, icon, children }) {
   return (
-    <div className="flex flex-col gap-2.5">
-      <label className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.15em] text-slate-500 dark:text-slate-400">
+    <div className="flex flex-col gap-2 min-[400px]:gap-2.5">
+      <label className="flex items-center gap-2 text-[10px] min-[400px]:text-[11px] font-bold uppercase tracking-[0.15em] text-slate-500 dark:text-slate-400">
         {icon && (
           <span className="text-slate-400 dark:text-slate-500">{icon}</span>
         )}
@@ -509,10 +515,10 @@ function ProductCard({ product, isDeleting, onDelete, onQuickEdit }) {
         </div>
       </div>
 
-      <div className="flex flex-col flex-1 px-6 pt-5 pb-6">
+      <div className="flex flex-col flex-1 px-3 min-[400px]:px-6 min-[500px]:px-4  min-[700px]:px-6  pt-5 pb-6">
         <Link
           to={`/products/${product._id}`}
-          className="text-[19px] font-extrabold text-slate-900 dark:text-white transition-colors hover:text-cyan-500 line-clamp-1"
+          className="text-md min-[400px]:text-[19px] font-extrabold text-slate-900 dark:text-white transition-colors hover:text-cyan-500 line-clamp-1"
         >
           {product.name}
         </Link>
@@ -523,23 +529,23 @@ function ProductCard({ product, isDeleting, onDelete, onQuickEdit }) {
             .join(" · ")}
         </p>
 
-        <p className="mt-3 line-clamp-1 text-[14px] text-slate-500 dark:text-slate-400">
+        <p className="mt-2  min-[400px]:mt-3 line-clamp-1 text-[14px] text-slate-500 dark:text-slate-400">
           {product.shortDescription ||
             product.description ||
             t("products.noDescription")}
         </p>
 
-        <div className="pt-5 mt-auto">
-          <div className="flex items-baseline gap-2">
-            <span className="text-[32px] font-black tracking-tight text-slate-900 dark:text-white">
+        <div className="pt-3 min-[400px]:pt-5 mt-auto">
+          <div className="flex items-baseline justify-between gap-2">
+            <span className="text-lg min-[400px]:text-[19px] min-[1000px]:text-[23px] font-black tracking-tight text-slate-900 dark:text-white">
               {(Number(product.price) || 0).toFixed(0)}{" "}
-              <span className="text-[16px] font-bold text-slate-500 dark:text-slate-400 tracking-normal ml-1">
+              <span className="text-sm  min-[400px]:text-[16px] font-bold text-slate-500 dark:text-slate-400 tracking-normal ml-1">
                 EGP
               </span>
             </span>
             {(Number(product.discountPrice) || Number(product.discount) || 0) >
               0 && (
-              <span className="text-[14px] font-semibold text-emerald-500 dark:text-emerald-400">
+              <span className="text-sm  min-[400px]:text-[14px] font-semibold text-emerald-500 dark:text-emerald-400">
                 -
                 {(
                   Number(product.discountPrice) ||
@@ -563,7 +569,7 @@ function ProductCard({ product, isDeleting, onDelete, onQuickEdit }) {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center gap-2 pt-5 mt-6 border-t border-slate-300 dark:border-slate-700">
+        <div className="flex flex-col items-center justify-center gap-2.5 min-[400px]:gap-2 pt-5 mt-3 min-[400px]:mt-6 border-t border-slate-300 dark:border-slate-700">
           <div className="flex flex-wrap flex-1 w-full gap-3">
             <ActionBtn
               icon={<FiEye />}
@@ -578,21 +584,22 @@ function ProductCard({ product, isDeleting, onDelete, onQuickEdit }) {
               className="flex items-center justify-center flex-1"
             />
           </div>
-          <div className="flex flex-wrap flex-1 w-full gap-3">
+          <div className="flex  flex-row  min-[500px]:flex-col  min-[610px]:flex-row  flex-wrap flex-1 w-full gap-3">
             <button
               type="button"
               onClick={onQuickEdit}
-              className="flex items-center justify-center flex-1 cursor-pointer  gap-1.5 rounded-lg border border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 px-3.5 py-2 text-[12px] font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-700/50 backdrop-blur-sm"
+              className="flex items-center justify-center flex-1 cursor-pointer gap-0.5 min-[400px]:gap-1.5 rounded-lg border border-slate-200/50 dark:border-slate-700/50 bg-white/70 dark:bg-slate-800/50 px-2.5 min-[400px]:px-3.5 py-2 min-[400px]:py-2 text-[10.5px] min-[400px]:text-[12px] font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-700/50 backdrop-blur-sm"
             >
-              <FiSliders size={14} /> {t("products.quickEdit")}
+              <FiSliders className="text-[10px] min-[400px]:text-[12px]" />{" "}
+              {t("products.quickEdit")}
             </button>
             <button
               type="button"
               disabled={isDeleting}
               onClick={onDelete}
-              className="flex items-center justify-center flex-1 cursor-pointer items-center gap-1.5 rounded-lg border border-rose-200 dark:border-rose-800/50 bg-rose-50 dark:bg-rose-950/30 px-3.5 py-2 text-[12px] font-semibold text-rose-600 dark:text-rose-400 transition-all hover:bg-rose-100 dark:hover:bg-rose-950/50 disabled:opacity-50"
+              className="flex items-center justify-center flex-1 cursor-pointer items-center gap-1 min-[400px]:gap-1.5 rounded-lg border border-rose-200 dark:border-rose-800/50 bg-rose-50 dark:bg-rose-950/30 px-2.5 min-[400px]:px-3.5 py-2 min-[400px]:py-2 text-[10.5px] min-[400px]:text-[12px] font-semibold text-rose-600 dark:text-rose-400 transition-all hover:bg-rose-100 dark:hover:bg-rose-950/50 disabled:opacity-50"
             >
-              <FiTrash2 size={14} />
+              <FiTrash2 className="text-[10px] min-[400px]:text-[12px]" />
               <span>{isDeleting ? "..." : t("products.delete")}</span>
             </button>
           </div>

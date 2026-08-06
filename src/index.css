@@ -1,16 +1,19 @@
 @import "tailwindcss";
 
+@custom-variant hover (&:hover);
+
+
 /* تفعيل dark mode عبر الكلاس */
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* تنسيقات أساسية */
 @layer base {
   * {
-    @apply border-slate-200 dark:border-slate-800 transition-colors duration-300;
+    @apply transition-colors duration-300 border-slate-200 dark:border-slate-800;
   }
 
   body {
-    @apply bg-white text-slate-900 dark:bg-slate-950 dark:text-white transition-colors duration-300;
+    @apply transition-colors duration-300 bg-white text-slate-900 dark:bg-slate-950 dark:text-white;
   }
 }
 
@@ -126,6 +129,7 @@
     transform: translateY(30px);
     opacity: 0;
   }
+
   100% {
     transform: translateY(0px);
     opacity: 1;

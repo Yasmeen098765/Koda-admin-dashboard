@@ -288,12 +288,12 @@ const EditUserModal = ({ user, onClose, onSave }) => {
 
   return createPortal(
     <div
-      className="fixed inset-0 bg-slate-900/80 flex items-center justify-center z-[100] backdrop-blur-sm p-4 overflow-y-auto"
+      className="fixed inset-0 bg-slate-900/80 flex items-center justify-center z-[100] backdrop-blur-sm p-3 min-[400px]:p-4 overflow-y-auto"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="bg-gradient-to-br from-white  to-sky-100 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 rounded-3xl p-6 w-full max-w-md mx-auto my-auto shadow-2xl border border-slate-200/50 dark:border-slate-700/50 max-h-[90vh] overflow-y-auto relative">
+      <div className="bg-gradient-to-br from-white  to-sky-100 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 rounded-xl px-3 py-5 min-[400px]:p-6 w-full max-w-md mx-auto my-auto shadow-2xl border border-slate-200/50 dark:border-slate-700/50 max-h-[90vh] overflow-y-auto relative">
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-xl font-bold text-slate-800 dark:text-white">
+          <h3 className="text-sm min-[400px]:text-lg min-[600px]:text-xl font-bold text-slate-800 dark:text-white">
             {t("users.editUser")}
           </h3>
           <button
@@ -306,13 +306,13 @@ const EditUserModal = ({ user, onClose, onSave }) => {
 
         <form onSubmit={handleSubmit}>
           {formError && (
-            <div className="px-4 py-3 mb-4 text-sm text-red-600 border border-red-200 rounded-xl bg-red-50 dark:bg-red-950/30 dark:border-red-800/50">
+            <div className="px-2  min-[400px]:px-4 py-1.5 min-[400px]:py-3 mb-4 text-[10px] min-[400px]:text-sm text-red-600 border border-red-200 rounded-xl bg-red-50 dark:bg-red-950/30 dark:border-red-800/50">
               {formError}
             </div>
           )}
 
           <div className="mb-4">
-            <label className="block mb-2 text-xs font-medium tracking-wider uppercase text-slate-500 dark:text-slate-400">
+            <label className="block mb-2 text-[10px]  min-[300px]:text-xs min-[400px]:text-xs font-medium tracking-wider uppercase text-slate-500 dark:text-slate-400">
               {t("users.username")}
             </label>
             <input
@@ -320,13 +320,13 @@ const EditUserModal = ({ user, onClose, onSave }) => {
               name="username"
               value={formData.username}
               onChange={handleChange}
-              className="w-full px-4 py-3 text-sm transition border bg-white/70 dark:bg-slate-900/50 border-slate-200 dark:border-slate-700 rounded-xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+              className="w-full px-2 min-[400px]:px-4 py-2 min-[400px]:py-2.5 rounded-lg min-[400px]:rounded-xl text-xs min-[400px]:text-sm transition border bg-white/70 dark:bg-slate-900/50 border-slate-200 dark:border-slate-700  text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
               required
             />
           </div>
 
           <div className="mb-4">
-            <label className="block mb-2 text-xs font-medium tracking-wider uppercase text-slate-500 dark:text-slate-400">
+            <label className="block mb-2 text-[10px]  min-[300px]:text-xs min-[400px]:text-xs font-medium tracking-wider uppercase text-slate-500 dark:text-slate-400">
               {t("users.phone")}
             </label>
             <input
@@ -334,13 +334,12 @@ const EditUserModal = ({ user, onClose, onSave }) => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full px-4 py-3 text-sm transition border bg-white/70 dark:bg-slate-900/50 border-slate-200 dark:border-slate-700 rounded-xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-              required
+              className="w-full px-2 min-[400px]:px-4 py-2 min-[400px]:py-2.5 rounded-lg min-[400px]:rounded-xl text-xs min-[400px]:text-sm transition border bg-white/70 dark:bg-slate-900/50 border-slate-200 dark:border-slate-700  text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
             />
           </div>
 
           <div className="mb-6">
-            <label className="block mb-2 text-xs font-medium tracking-wider uppercase text-slate-500 dark:text-slate-400">
+            <label className="block mb-2 text-[10px]  min-[300px]:text-xs min-[400px]:text-xs font-medium tracking-wider uppercase text-slate-500 dark:text-slate-400">
               {t("users.avatarUrl")}
             </label>
             <input
@@ -348,15 +347,14 @@ const EditUserModal = ({ user, onClose, onSave }) => {
               name="avatar"
               value={formData.avatar}
               onChange={handleChange}
-              className="w-full px-4 py-3 text-sm transition border bg-white/70 dark:bg-slate-900/50 border-slate-200 dark:border-slate-700 rounded-xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-              required
+              className="w-full px-2 min-[400px]:px-4 py-2 min-[400px]:py-2.5 rounded-lg min-[400px]:rounded-xl text-xs min-[400px]:text-sm transition border bg-white/70 dark:bg-slate-900/50 border-slate-200 dark:border-slate-700  text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
             />
           </div>
 
           <button
             type="submit"
             disabled={saving}
-            className="w-full py-3.5 cursor-pointer bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600 text-white font-semibold rounded-xl transition flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-50 select-none shadow-lg shadow-cyan-500/20"
+            className="w-full text-xs  min-[400px]:text-base py-2 min-[400px]:py-3.5 cursor-pointer bg-gradient-to-r from-cyan-500 to-sky-500 hover:from-cyan-600 hover:to-sky-600 text-white font-semibold  rounded-lg min-[400px]:rounded-xl transition flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-50 select-none shadow-lg shadow-cyan-500/20"
           >
             {saving ? (
               <>
@@ -385,7 +383,7 @@ const StatCard = ({ title, value, icon: Icon, color }) => (
       </p>
     </div>
     <div
-      className={ `w-6 h-6 min-[400px]:w-10 min-[400px]:h-10 min-[500px]::w-12 min-[500px]::h-12 rounded-lg flex items-center justify-center ${color}`}
+      className={`w-6 h-6 min-[400px]:w-10 min-[400px]:h-10 min-[500px]::w-12 min-[500px]::h-12 rounded-lg flex items-center justify-center ${color}`}
     >
       <Icon className="w-3 h-3  sm:w-5 sm:h-5 text-white lg:w-6 lg:h-6 " />
     </div>
@@ -411,15 +409,15 @@ const VerifiedBadge = ({ isVerified }) => {
   const { t } = useLanguage();
   if (isVerified) {
     return (
-      <span className="flex items-center gap-1 text-xs min-[400px]:text-sm font-medium text-emerald-600 dark:text-emerald-400">
+      <span className="flex items-center gap-1 text-[10px] min-[300px]:text-xs min-[400px]:text-sm font-medium text-emerald-600 dark:text-emerald-400">
         <BadgeCheck className="w-3 h-3  min-[400px]:w-4 min-[400px]:h-4 shrink-0" />
         {t("users.verified")}
       </span>
     );
   }
   return (
-    <span className="flex items-center gap-1 text-sm font-medium text-rose-500 dark:text-rose-400">
-      <X className="w-4 h-4 shrink-0" />
+    <span className="flex items-center gap-1 text-xs min-[400px]:text-sm font-medium text-rose-500 dark:text-rose-400">
+      <X className="w-3 h-3  min-[400px]:w-4 min-[400px]:h-4 shrink-0" />
       {t("users.no")}
     </span>
   );
@@ -444,7 +442,7 @@ const DeleteModal = ({ user, onConfirm, onCancel, deleting }) => {
     >
       <div className="relative w-full max-w-md p-6 mx-auto my-auto border shadow-2xl bg-gradient-to-br from-white to-sky-200 dark:from-slate-800 dark:via-slate-800/90 dark:to-sky-900/30 rounded-2xl border-slate-200/50 dark:border-slate-700/50">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-sm  min-[500px]:text-xl font-bold text-slate-800 dark:text-white">
+          <h3 className="text-sm min-[400px]:text-lg min-[600px]:text-xl font-bold text-slate-800 dark:text-white">
             {t("users.deleteUserTitle")}
           </h3>
           <button
@@ -462,14 +460,14 @@ const DeleteModal = ({ user, onConfirm, onCancel, deleting }) => {
         <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
           <button
             onClick={onCancel}
-            className="w-full sm:w-auto px-6 py-2.5 text-sm font-bold rounded-lg cursor-pointer text-slate-600 hover:text-slate-800 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 dark:text-slate-300 dark:hover:text-white dark:bg-slate-800 dark:hover:bg-slate-700 dark:border-slate-700 dark:hover:border-slate-600 transition-all duration-200 shadow-sm hover:shadow"
+            className="w-full sm:w-auto px-3 min-[400px]:px-6  py-2 min-[400px]:py-2.5 text-[10px] min-[270px]:text-xs min-[400px]:text-sm min-[600px]:text-base font-bold  rounded-md min-[400px]:rounded-lg cursor-pointer text-slate-600 hover:text-slate-800 bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 dark:text-slate-300 dark:hover:text-white dark:bg-slate-800 dark:hover:bg-slate-700 dark:border-slate-700 dark:hover:border-slate-600 transition-all duration-200 shadow-sm hover:shadow"
           >
             {t("users.cancelBtn")}
           </button>
           <button
             onClick={onConfirm}
             disabled={deleting}
-            className="w-full sm:w-auto px-4 py-2.5 rounded-lg cursor-pointer bg-gradient-to-r from-rose-500 to-red-500 text-white hover:from-rose-600 hover:to-red-600 transition-colors flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-50 select-none shadow-lg shadow-rose-500/20"
+            className="w-full sm:w-auto  px-3 min-[400px]:px-4  py-2 min-[400px]:py-2.5 text-[10px] min-[270px]:text-xs min-[400px]:text-sm min-[600px]:text-base rounded-md min-[400px]:rounded-lg cursor-pointer bg-gradient-to-r from-rose-500 to-red-500 text-white hover:from-rose-600 hover:to-red-600 transition-colors flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-50 select-none shadow-lg shadow-rose-500/20"
           >
             {deleting && <Loader2 className="w-4 h-4 animate-spin" />}
             {t("users.deleteBtn")}
@@ -573,7 +571,7 @@ const AddUserForm = ({ onClose, onSubmit }) => {
             />
           </div>
           <div>
-             <label className="block text-[10px]  min-[300px]:text-xs min-[400px]:text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">
+            <label className="block text-[10px]  min-[300px]:text-xs min-[400px]:text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">
               {t("users.email")} <span className="text-rose-500">*</span>
             </label>
             <input
@@ -587,7 +585,7 @@ const AddUserForm = ({ onClose, onSubmit }) => {
             />
           </div>
           <div>
-             <label className="block text-[10px]  min-[300px]:text-xs min-[400px]:text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">
+            <label className="block text-[10px]  min-[300px]:text-xs min-[400px]:text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">
               {t("users.password")} <span className="text-rose-500">*</span>
             </label>
             <input
@@ -602,7 +600,7 @@ const AddUserForm = ({ onClose, onSubmit }) => {
             />
           </div>
           <div>
-             <label className="block text-[10px]  min-[300px]:text-xs min-[400px]:text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">
+            <label className="block text-[10px]  min-[300px]:text-xs min-[400px]:text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">
               {t("users.phone")}
             </label>
             <input
