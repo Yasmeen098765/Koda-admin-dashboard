@@ -626,10 +626,9 @@ export default function QuickEdit({
     }
   };
 
-  const handleSave = async (e) => {
+const handleSave = async (e) => {
   if (e) e.preventDefault();
 
-  // ✅ فحص: تأكد من وجود product._id
   if (!product?._id) {
     console.error("❌ Product ID is missing:", product);
     return toast.error("Product ID is missing. Please refresh and try again.");
@@ -644,7 +643,6 @@ export default function QuickEdit({
   try {
     const data = new FormData();
     
-    // ✅ إضافة بيانات المنتج (تجاهل الحقول الفارغة)
     Object.keys(product).forEach((key) => {
       const value = product[key];
       if (key !== "_id" && value !== "" && value !== null && value !== undefined) {
@@ -656,24 +654,22 @@ export default function QuickEdit({
       }
     });
 
-    // ✅ إضافة tags
     const safeTags = Array.isArray(tags) ? tags : [];
     if (safeTags.length > 0) {
       safeTags.forEach((tag) => data.append("tags", tag));
     }
 
-    // ✅ إضافة الصور الجديدة
     const safeNewImages = Array.isArray(newImages) ? newImages : [];
     safeNewImages.forEach((image) => {
       data.append("images", image);
     });
 
-    // ✅ ✅ الحل النهائي: إرسال deletedImages فقط إذا كانت غير فارغة
+    // ✅ ✅ مطابقة لـ Edit.jsx: إرسال deletedImages فقط إذا كانت غير فارغة
     const safeDeletedImages = Array.isArray(deletedImages) ? deletedImages : [];
     if (safeDeletedImages.length > 0) {
       data.append("deletedImages", JSON.stringify(safeDeletedImages));
     }
-    // إذا كانت فارغة، لا نرسل الحقل نهائياً
+    // إذا كانت فارغة، لا نرسل الحقل نهائياً (مثل Edit.jsx)
 
     console.log("📦 FormData entries:");
     for (let [key, value] of data.entries()) {
