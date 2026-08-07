@@ -144,7 +144,7 @@
 //       if (deletedImages.length > 0) {
 //         data.append("deletedImages", JSON.stringify(deletedImages));
 //       }
-       
+
 //       await api.patch(`/products/update/${product._id}`, data, {
 //         headers: {
 //           "Content-Type": "multipart/form-data",
@@ -504,10 +504,10 @@ export default function QuickEdit({
   onSuccess,
 }) {
   const { t } = useLanguage();
-  
+
   // ✅ التحقق من وجود initialProduct
   console.log("🔍 QuickEdit - initialProduct:", initialProduct);
-  
+
   // ✅ فحص: إذا لم يكن هناك product، أغلق المودال
   if (!initialProduct || !initialProduct._id) {
     console.error("❌ QuickEdit: No product data provided");
@@ -515,7 +515,7 @@ export default function QuickEdit({
     onClose();
     return null;
   }
-  
+
   const [product, setProduct] = useState({
     _id: initialProduct?._id || "",
     name: initialProduct?.name || initialProduct?.title || "",
@@ -581,7 +581,7 @@ export default function QuickEdit({
   const removeImage = (index) => {
     // ✅ التأكد من أن deletedImages هي مصفوفة
     const currentExisting = existingImages || [];
-    
+
     if (index < currentExisting.length) {
       const imgToRemove = currentExisting[index];
       if (imgToRemove && imgToRemove.public_id) {
@@ -590,7 +590,9 @@ export default function QuickEdit({
           return [...safePrev, imgToRemove.public_id];
         });
       }
-      setExistingImages((prev) => (prev || []).filter((_, idx) => idx !== index));
+      setExistingImages((prev) =>
+        (prev || []).filter((_, idx) => idx !== index),
+      );
     } else {
       const newIndex = index - currentExisting.length;
       setNewImages((prev) => (prev || []).filter((_, idx) => idx !== newIndex));
@@ -624,7 +626,7 @@ export default function QuickEdit({
     }
   };
 
-const handleSave = async (e) => {
+  const handleSave = async (e) => {
   if (e) e.preventDefault();
 
   // ✅ فحص: تأكد من وجود product._id
@@ -666,18 +668,19 @@ const handleSave = async (e) => {
       data.append("images", image);
     });
 
-    // ✅ ✅ الحل النهائي: إرسال deletedImages كـ string دائماً
+    // ✅ ✅ الحل النهائي: إرسال deletedImages فقط إذا كانت غير فارغة
     const safeDeletedImages = Array.isArray(deletedImages) ? deletedImages : [];
-    // إذا كانت المصفوفة فارغة، أرسل "[]" كـ string
-    data.append("deletedImages", JSON.stringify(safeDeletedImages));
+    if (safeDeletedImages.length > 0) {
+      data.append("deletedImages", JSON.stringify(safeDeletedImages));
+    }
+    // إذا كانت فارغة، لا نرسل الحقل نهائياً
 
     console.log("📦 FormData entries:");
     for (let [key, value] of data.entries()) {
       console.log(key, value);
     }
 
-    // ✅ طباعة deletedImages بشكل منفصل للتأكد
-    console.log("🗑️ deletedImages being sent:", JSON.stringify(safeDeletedImages));
+    console.log("🗑️ deletedImages being sent:", safeDeletedImages.length > 0 ? JSON.stringify(safeDeletedImages) : "NOT SENT");
 
     const response = await api.patch(`/products/update/${product._id}`, data, {
       headers: {
@@ -707,6 +710,7 @@ const handleSave = async (e) => {
     setLoading(false);
   }
 };
+
 
   const categories = [
     "Electronics",
