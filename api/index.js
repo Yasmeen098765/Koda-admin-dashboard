@@ -12,10 +12,13 @@ export default async function handler(req, res) {
   try {
     // استخراج المسار من الرابط
     // مثال: /api/auth/login → auth/login
+    // مثال: /api/orders/admin → orders/admin
     const path = req.url.replace('/api', '');
     
     // بناء الرابط الكامل للـ API الأصلي
     const targetUrl = `https://e-commerce-api-3wara.vercel.app${path}`;
+
+    console.log(`🔄 Proxying: ${req.method} ${req.url} → ${targetUrl}`);
 
     // إعداد خيارات الطلب
     const fetchOptions = {
@@ -35,10 +38,12 @@ export default async function handler(req, res) {
     const response = await fetch(targetUrl, fetchOptions);
     const data = await response.json();
 
+    console.log(`✅ Response: ${response.status} from ${targetUrl}`);
+
     // إرجاع الاستجابة للمتصفح
     res.status(response.status).json(data);
   } catch (error) {
-    console.error('Proxy error:', error);
+    console.error('❌ Proxy error:', error);
     res.status(500).json({ 
       success: false, 
       message: 'Internal server error',
