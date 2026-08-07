@@ -1,10 +1,9 @@
 import { useState, useRef } from "react";
 import { FiX, FiImage, FiLoader, FiPlus } from "react-icons/fi";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import api from "../api/api";
 import { useLanguage } from "../Context/LanguageContext";
 import "react-toastify/dist/ReactToastify.css";
-
 
 export default function QuickEdit({
   product: initialProduct,
@@ -153,15 +152,15 @@ export default function QuickEdit({
         },
       });
 
-     toast.success("Product updated successfully!", {
-  position: "bottom-right",
-  autoClose: 3000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  theme: "colored",
-});
+      toast.success("Product updated successfully!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+      });
       onSuccess();
     } catch (err) {
       console.error("Update Error:", err);
@@ -216,7 +215,7 @@ export default function QuickEdit({
               <FiX size={18} />
             </button>
           </div>
-  
+
           <div className="flex-1 p-3 overflow-y-auto sm:p-6 custom-scrollbar">
             <form className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-12">
               <div className="flex flex-col gap-4 sm:gap-6 md:col-span-4">
@@ -268,7 +267,7 @@ export default function QuickEdit({
                     accept="image/*"
                   />
                 </div>
-  
+
                 <div className="p-3 border sm:p-5 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border-slate-200 dark:border-slate-700">
                   <label className="text-[10px] sm:text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-3 block">
                     {t("quickEdit.status")}
@@ -301,7 +300,7 @@ export default function QuickEdit({
                   </div>
                 </div>
               </div>
-  
+
               <div className="flex flex-col gap-4 sm:gap-5 md:col-span-8">
                 <div className="grid grid-cols-1 gap-3 sm:gap-5 sm:grid-cols-2">
                   <div className="flex flex-col gap-1.5 sm:col-span-2">
@@ -316,7 +315,7 @@ export default function QuickEdit({
                       required
                     />
                   </div>
-  
+
                   <div className="flex flex-col gap-1.5 sm:col-span-2">
                     <label className="text-[10px] sm:text-[11px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-wider">
                       {t("addProduct.shortDesc")}
@@ -329,7 +328,7 @@ export default function QuickEdit({
                       required
                     />
                   </div>
-  
+
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[10px] sm:text-[11px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-wider">
                       {t("addProduct.price")}
@@ -345,7 +344,7 @@ export default function QuickEdit({
                       required
                     />
                   </div>
-  
+
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[10px] sm:text-[11px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-wider">
                       {t("addProduct.discountPrice")}
@@ -360,7 +359,7 @@ export default function QuickEdit({
                       step="1"
                     />
                   </div>
-  
+
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[10px] sm:text-[11px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-wider">
                       {t("addProduct.stock")}
@@ -375,7 +374,7 @@ export default function QuickEdit({
                       required
                     />
                   </div>
-  
+
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[10px] sm:text-[11px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-wider">
                       {t("addProduct.sku")}
@@ -384,11 +383,13 @@ export default function QuickEdit({
                       name="sku"
                       value={product.sku}
                       onChange={handleChange}
-                      placeholder={t("addProduct.skuPlaceholder") || "Enter SKU"}
+                      placeholder={
+                        t("addProduct.skuPlaceholder") || "Enter SKU"
+                      }
                       className="w-full h-10 px-3 text-xs transition-all bg-white border rounded-lg sm:h-12 sm:px-4 sm:text-sm dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                     />
                   </div>
-  
+
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[10px] sm:text-[11px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-wider">
                       {t("addProduct.categoryLabel")}
@@ -416,7 +417,7 @@ export default function QuickEdit({
                         )}
                     </select>
                   </div>
-  
+
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[10px] sm:text-[11px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-wider">
                       {t("addProduct.brand")}
@@ -428,7 +429,7 @@ export default function QuickEdit({
                       className="w-full h-10 px-3 text-xs transition-all bg-white border rounded-lg sm:h-12 sm:px-4 sm:text-sm dark:bg-slate-900 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                     />
                   </div>
-  
+
                   <div className="flex flex-col gap-1.5 sm:col-span-2">
                     <label className="text-[10px] sm:text-[11px] uppercase text-slate-500 dark:text-slate-400 font-bold tracking-wider">
                       {t("addProduct.tags")}
@@ -473,7 +474,7 @@ export default function QuickEdit({
               </div>
             </form>
           </div>
-  
+
           <div className="flex flex-col-reverse justify-end gap-2 px-4 py-3 border-t sm:flex-row sm:gap-3 sm:px-6 sm:py-4 border-slate-200 dark:border-slate-700 shrink-0 bg-slate-50/80 dark:bg-slate-900/80">
             <button
               type="button"
@@ -500,7 +501,7 @@ export default function QuickEdit({
           </div>
         </div>
       </div>
-        <ToastContainer position="bottom-right" theme="colored" />
+     
     </>
   );
 }
