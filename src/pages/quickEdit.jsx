@@ -705,7 +705,7 @@ const handleSave = async (e) => {
     }
 
     // ✅ إرسال الطلب (مثل Edit.jsx)
-    const response = await api.patch(`/api/products/update/${product._id}`, data, {
+    const response = await api.patch(`/products/update/${product._id}`, data, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
