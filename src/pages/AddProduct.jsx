@@ -106,74 +106,69 @@ export default function AddProduct() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (images.length === 0) {
-      toast.error("Please upload at least one image.");
-      return;
-    }
+  e.preventDefault();
+  if (images.length === 0) {
+    toast.error("Please upload at least one image.");
+    return;
+  }
 
-    setLoading(true);
-    try {
-      const data = new FormData();
-      Object.keys(formData).forEach((key) => {
-        if (formData[key] !== "") {
+  setLoading(true);
+  try {
+    const data = new FormData();
+    
+    // ✅ إضافة الحقول النصية
+    Object.keys(formData).forEach((key) => {
+      if (formData[key] !== "" && formData[key] !== null && formData[key] !== undefined) {
+        if (typeof formData[key] === 'boolean') {
+          data.append(key, String(formData[key]));
+        } else {
           data.append(key, formData[key]);
         }
-      });
-
-      if (tags.length > 0) {
-        if (tags.length === 1) {
-          data.append("tags", tags[0]);
-          data.append("tags", tags[0]);
-        } else {
-          tags.forEach((tag) => data.append("tags", tag));
-        }
       }
+    });
 
-      images.forEach((image, index) => {
-        const ext = image.name.split(".").pop() || "jpg";
-        const safeName = `upload_${Date.now()}_${index}.${ext}`;
-        const safeFile = new File([image], safeName, { type: image.type });
-        data.append("images", safeFile);
-
-        if (images.length === 1) {
-          data.append("images", safeFile);
-        }
-      });
-
-      await api.post("/products", data);
-      toast.success("Product created successfully!");
-      setTimeout(() => {
-        navigate("/products");
-      }, 1500);
-    } catch (error) {
-      console.error("Create Product Error:", error);
-      if (error.response?.data?.errors) {
-        const errs = error.response.data.errors;
-
-        const hasCloudinaryError =
-          Array.isArray(errs) &&
-          errs.some((e) => e.includes("public_id") || e.includes("url"));
-        if (hasCloudinaryError) {
-          toast.error(
-            "Server failed to upload image (might be too large or unsupported). Please try a smaller/different image.",
-          );
-        } else if (Array.isArray(errs) && errs.length > 0) {
-          toast.error(errs.join(", "));
-        } else if (typeof errs === "string") {
-          toast.error(errs);
-        } else {
-          toast.error(JSON.stringify(errs));
-        }
-      } else {
-        toast.error(
-          error.response?.data?.message || "Failed to create product",
-        );
-      }
-    } finally {
-      setLoading(false);
+    // ✅ إضافة tags
+    if (tags.length > 0) {
+      tags.forEach((tag) => data.append("tags", tag));
     }
-  };
+
+    // ✅ إضافة الصور مباشرة (بدون تغيير الأسماء)
+    images.forEach((image) => {
+      data.append("images", image);
+    });
+
+    // ✅ إرسال الطلب
+    await api.post("/products", data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    toast.success("Product created successfully!");
+    setTimeout(() => {
+      navigate("/products");
+    }, 1500);
+  } catch (error) {
+    console.error("Create Product Error:", error);
+    
+    if (error.response?.data?.errors) {
+      const errs = error.response.data.errors;
+      if (Array.isArray(errs) && errs.length > 0) {
+        toast.error(errs.join(", "));
+      } else if (typeof errs === "string") {
+        toast.error(errs);
+      } else {
+        toast.error(JSON.stringify(errs));
+      }
+    } else {
+      toast.error(
+        error.response?.data?.message || "Failed to create product",
+      );
+    }
+  } finally {
+    setLoading(false);
+  }
+};
 
   if (showSkeleton) {
     const skeletonBaseColor = isDarkMode ? "#1e293b" : "#e2e8f0";
