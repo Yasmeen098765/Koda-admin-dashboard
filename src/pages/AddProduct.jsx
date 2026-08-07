@@ -131,14 +131,14 @@ export default function AddProduct() {
       }
     });
 
-    //  إضافة tags (حل وسط)
-   if (tags.length === 1) {
-      // tag واحد: أرسل كـ JSON string
-      data.append("tags", JSON.stringify(tags));
-    } else if (tags.length > 1) {
-      // tags متعددة: أرسل كـ FormData
-      tags.forEach((tag) => data.append("tags", tag));
-    }
+   
+   //  إضافة tags مع ضمان مصفوفة في FormData
+if (tags.length === 1) {
+  // أرسل tag واحد مع "[]" لضمان أنه مصفوفة
+  data.append("tags", `["${tags[0]}"]`);
+} else if (tags.length > 1) {
+  tags.forEach((tag) => data.append("tags", tag));
+}
 
     // إضافة الصور مباشرة
     images.forEach((image) => {
