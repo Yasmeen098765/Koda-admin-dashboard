@@ -664,19 +664,16 @@ const handleSave = async (e) => {
       data.append("images", image);
     });
 
-    // ✅ ✅ مطابقة لـ Edit.jsx: إرسال deletedImages فقط إذا كانت غير فارغة
+    // ✅ ✅ الحل النهائي: إرسال deletedImages دائماً (حتى لو كانت فارغة)
     const safeDeletedImages = Array.isArray(deletedImages) ? deletedImages : [];
-    if (safeDeletedImages.length > 0) {
-      data.append("deletedImages", JSON.stringify(safeDeletedImages));
-    }
-    // إذا كانت فارغة، لا نرسل الحقل نهائياً (مثل Edit.jsx)
+    data.append("deletedImages", JSON.stringify(safeDeletedImages));
 
     console.log("📦 FormData entries:");
     for (let [key, value] of data.entries()) {
       console.log(key, value);
     }
 
-    console.log("🗑️ deletedImages being sent:", safeDeletedImages.length > 0 ? JSON.stringify(safeDeletedImages) : "NOT SENT");
+    console.log("🗑️ deletedImages being sent:", JSON.stringify(safeDeletedImages));
 
     const response = await api.patch(`/products/update/${product._id}`, data, {
       headers: {
