@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create an Axios instance with a base URL
 const api = axios.create({
-  baseURL: "https://e-commerce-api-3wara.vercel.app/",
+   baseURL: "/api", // ✅ هذا هو التغيير الوحيد
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
