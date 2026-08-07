@@ -105,12 +105,10 @@ export default function AddProduct() {
     setTags((prev) => prev.filter((tag) => tag !== tagToRemove));
   };
 
- const handleSubmit = async (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
   
-  // ✅ تحقق من tags
   console.log("📝 Tags before submit:", tags);
-  console.log("📝 Is tags an array?", Array.isArray(tags));
   
   if (images.length === 0) {
     toast.error("Please upload at least one image.");
@@ -136,11 +134,13 @@ export default function AddProduct() {
       }
     });
 
-    // ✅ إضافة tags كـ JSON string
+    // ✅ إضافة tags مع "tags[]"
     const safeTags = Array.isArray(tags) ? tags : [];
     if (safeTags.length > 0) {
-      data.append("tags", JSON.stringify(safeTags));
-      console.log("📝 Tags as JSON string:", JSON.stringify(safeTags));
+      safeTags.forEach((tag) => {
+        data.append("tags[]", tag);
+        console.log("📝 Appending tag with tags[]:", tag);
+      });
     }
 
     // إضافة الصور
