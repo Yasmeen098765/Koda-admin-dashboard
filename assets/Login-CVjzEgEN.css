@@ -1,0 +1,1 @@
+.login .loginMain{opacity:.7;transform-origin:top;will-change:transform, opacity;animation:.4s ease-in-out forwards slideUp;transform:translateY(30px)}@keyframes slideUp{0%{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
