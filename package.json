@@ -21,6 +21,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "@uiw/react-back-to-top": "^1.2.4",
     "axios": "^1.18.1",
+    "formidable": "^3.5.4",
     "framer-motion": "^12.40.0",
     "lucide-react": "^1.23.0",
     "react": "^19.2.6",
