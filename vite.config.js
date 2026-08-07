@@ -8,7 +8,7 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-    base: '/Koda-admin-dashboard/',
+   base: '/',
      build: {
     outDir: 'dist',
     assetsDir: 'assets'
