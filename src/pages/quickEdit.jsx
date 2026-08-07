@@ -492,8 +492,6 @@
 //   );
 // }
 
-
-
 import { useState, useRef } from "react";
 import { FiX, FiImage, FiLoader, FiPlus } from "react-icons/fi";
 import { toast } from "react-toastify";
@@ -509,6 +507,14 @@ export default function QuickEdit({
   
   // ✅ التحقق من وجود initialProduct
   console.log("🔍 QuickEdit - initialProduct:", initialProduct);
+  
+  // ✅ فحص: إذا لم يكن هناك product، أغلق المودال
+  if (!initialProduct || !initialProduct._id) {
+    console.error("❌ QuickEdit: No product data provided");
+    toast.error("Product data is missing. Please refresh and try again.");
+    onClose();
+    return null;
+  }
   
   const [product, setProduct] = useState({
     _id: initialProduct?._id || "",
@@ -636,22 +642,23 @@ export default function QuickEdit({
     try {
       const data = new FormData();
       
-      // إضافة بيانات المنتج
+      // ✅ إضافة بيانات المنتج (تجاهل الحقول الفارغة)
       Object.keys(product).forEach((key) => {
-        if (key !== "_id" && product[key] !== "" && product[key] !== null && product[key] !== undefined) {
-          data.append(key, product[key]);
+        const value = product[key];
+        if (key !== "_id" && value !== "" && value !== null && value !== undefined) {
+          // ✅ تحويل القيم المنطقية إلى string
+          if (typeof value === 'boolean') {
+            data.append(key, String(value));
+          } else {
+            data.append(key, value);
+          }
         }
       });
 
       // ✅ التأكد من أن tags هي مصفوفة
       const safeTags = Array.isArray(tags) ? tags : [];
       if (safeTags.length > 0) {
-        if (safeTags.length === 1) {
-          data.append("tags", safeTags[0]);
-          data.append("tags", safeTags[0]);
-        } else {
-          safeTags.forEach((tag) => data.append("tags", tag));
-        }
+        safeTags.forEach((tag) => data.append("tags", tag));
       }
 
       // ✅ التأكد من أن newImages هي مصفوفة
