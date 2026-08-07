@@ -870,65 +870,79 @@ export default function Edit() {
     setTags((prev) => prev.filter((tag) => tag !== tagToRemove));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (imagePreviews.length === 0) {
-      toast.error("Please ensure there is at least one image.");
-      return;
-    }
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (imagePreviews.length === 0) {
+    toast.error("Please ensure there is at least one image.");
+    return;
+  }
 
-    setLoading(true);
-    try {
-      const data = new FormData();
-      Object.keys(formData).forEach((key) => {
-        if (formData[key] !== "") {
+  setLoading(true);
+  try {
+    const data = new FormData();
+    
+    // ✅ إضافة الحقول النصية
+    Object.keys(formData).forEach((key) => {
+      if (formData[key] !== "" && formData[key] !== null && formData[key] !== undefined) {
+        if (typeof formData[key] === 'boolean') {
+          data.append(key, String(formData[key]));
+        } else {
           data.append(key, formData[key]);
         }
-      });
-
-      if (tags.length > 0) {
-        tags.forEach((tag) => data.append("tags", tag));
       }
+    });
 
-      if (deletedImages.length > 0) {
-        data.append("deletedImages", JSON.stringify(deletedImages));
-      }
+    // ✅ إضافة tags
+    if (tags.length > 0) {
+      tags.forEach((tag) => data.append("tags", tag));
+    }
 
-      // ✅ إضافة الصور الجديدة مباشرة
+    // ✅ إضافة deletedImages
+    if (deletedImages.length > 0) {
+      data.append("deletedImages", JSON.stringify(deletedImages));
+    }
+
+    // ✅ إضافة الصور الجديدة (ملفات)
+    if (images.length > 0) {
       images.forEach((image) => {
+        // إرسال الملف مباشرة باسم "images"
         data.append("images", image);
       });
-
-      await api.patch(`/products/update/${id}`, data, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      toast.success("Product updated successfully!");
-      setTimeout(() => {
-        navigate("/products");
-      }, 1500);
-    } catch (error) {
-      console.error("Update Product Error:", error);
-      if (error.response?.data?.errors) {
-        const errs = error.response.data.errors;
-        if (Array.isArray(errs) && errs.length > 0) {
-          toast.error(errs.join(", "));
-        } else if (typeof errs === "string") {
-          toast.error(errs);
-        } else {
-          toast.error(JSON.stringify(errs));
-        }
-      } else {
-        toast.error(
-          error.response?.data?.message || "Failed to update product",
-        );
-      }
-    } finally {
-      setLoading(false);
     }
-  };
+
+    // ✅ إرسال الطلب مع Content-Type: multipart/form-data
+    const response = await api.patch(`/products/update/${id}`, data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    toast.success("Product updated successfully!");
+    setTimeout(() => {
+      navigate("/products");
+    }, 1500);
+  } catch (error) {
+    console.error("Update Product Error:", error);
+    console.error("Error response:", error.response?.data);
+    
+    if (error.response?.data?.errors) {
+      const errs = error.response.data.errors;
+      if (Array.isArray(errs) && errs.length > 0) {
+        toast.error(errs.join(", "));
+      } else if (typeof errs === "string") {
+        toast.error(errs);
+      } else {
+        toast.error(JSON.stringify(errs));
+      }
+    } else {
+      toast.error(
+        error.response?.data?.message || "Failed to update product",
+      );
+    }
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <main className="px-3 py-6 sm:p-4 lg:p-6 xl:p-8 space-y-4 sm:space-y-6 lg:space-y-8 min-h-screen bg-slate-50/50 text-slate-900 mx-auto max-w-[1600px] dark:bg-slate-900">
