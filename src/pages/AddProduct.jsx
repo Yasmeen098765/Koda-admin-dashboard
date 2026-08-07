@@ -132,9 +132,9 @@ export default function AddProduct() {
       });
 
       //  إضافة tags
-      if (tags.length > 0) {
-        tags.forEach((tag) => data.append("tags", tag));
-      }
+     if (tags.length > 0) {
+      data.append("tags", JSON.stringify(tags));
+    }
 
       // إضافة الصور مباشرة (بدون تغيير الأسماء)
       images.forEach((image) => {
