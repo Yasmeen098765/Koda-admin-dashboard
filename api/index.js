@@ -55,13 +55,12 @@
 //   }
 // }
 
-
-import formidable from 'formidable';
 import { IncomingForm } from 'formidable';
+import fs from 'fs';
 
 export const config = {
   api: {
-    bodyParser: false, // ✅ مهم: لتعطيل bodyParser الافتراضي
+    bodyParser: false,
   },
 };
 
@@ -81,17 +80,19 @@ export default async function handler(req, res) {
 
     console.log(`🔄 Proxying: ${req.method} ${req.url} → ${targetUrl}`);
 
-    // ✅ معالجة FormData بشكل صحيح
+    const contentType = req.headers['content-type'] || '';
     let body;
     let headers = {
       'Authorization': req.headers.authorization || '',
     };
 
-    const contentType = req.headers['content-type'] || '';
-
     if (contentType.includes('multipart/form-data')) {
-      // ✅ استخدام formidable لمعالجة FormData
-      const form = new IncomingForm();
+      // ✅ معالجة FormData مع الملفات
+      const form = new IncomingForm({
+        multiples: true,
+        keepExtensions: true,
+      });
+
       const { fields, files } = await new Promise((resolve, reject) => {
         form.parse(req, (err, fields, files) => {
           if (err) reject(err);
@@ -99,7 +100,7 @@ export default async function handler(req, res) {
         });
       });
 
-      // ✅ بناء FormData جديد لإرساله إلى الـ API الأصلي
+      // ✅ بناء FormData جديد
       const formData = new FormData();
       
       // إضافة الحقول النصية
@@ -112,20 +113,24 @@ export default async function handler(req, res) {
         }
       });
 
-      // إضافة الملفات
+      // ✅ إضافة الملفات بشكل صحيح
       Object.keys(files).forEach(key => {
         const file = files[key];
         if (Array.isArray(file)) {
           file.forEach(f => {
-            formData.append(key, f, f.name);
+            // ✅ قراءة الملف كـ Buffer
+            const fileBuffer = fs.readFileSync(f.filepath);
+            const blob = new Blob([fileBuffer], { type: f.mimetype });
+            formData.append(key, blob, f.name);
           });
         } else if (file) {
-          formData.append(key, file, file.name);
+          const fileBuffer = fs.readFileSync(file.filepath);
+          const blob = new Blob([fileBuffer], { type: file.mimetype });
+          formData.append(key, blob, file.name);
         }
       });
 
       body = formData;
-      // لا نضيف Content-Type، سيتعامل معه fetch تلقائياً
     } else {
       headers['Content-Type'] = 'application/json';
       if (req.method !== 'GET' && req.body) {
