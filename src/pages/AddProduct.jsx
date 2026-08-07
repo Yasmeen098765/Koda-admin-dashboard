@@ -87,15 +87,12 @@ export default function AddProduct() {
   };
 
   const handleAddTag = () => {
-  const trimmed = tagInput.trim();
-  if (trimmed && !tags.includes(trimmed)) {
-    const newTags = [...tags, trimmed];
-    console.log("📝 Added tag:", trimmed);
-    console.log("📝 New tags array:", newTags);
-    setTags(newTags);
-    setTagInput("");
-  }
-};
+    const trimmed = tagInput.trim();
+    if (trimmed && !tags.includes(trimmed)) {
+      setTags((prev) => [...prev, trimmed]);
+      setTagInput("");
+    }
+  };
 
   const handleTagKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -108,76 +105,74 @@ export default function AddProduct() {
     setTags((prev) => prev.filter((tag) => tag !== tagToRemove));
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (images.length === 0) {
-    toast.error("Please upload at least one image.");
-    return;
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (images.length === 0) {
+      toast.error("Please upload at least one image.");
+      return;
+    }
 
-  setLoading(true);
-  try {
-    const data = new FormData();
+    setLoading(true);
+    try {
+      const data = new FormData();
 
-    // ✅ إضافة الحقول النصية (مثل Edit.jsx)
-    Object.keys(formData).forEach((key) => {
-      if (formData[key] !== "" && formData[key] !== null && formData[key] !== undefined) {
-        if (typeof formData[key] === "boolean") {
-          data.append(key, String(formData[key]));
-        } else {
-          data.append(key, formData[key]);
+      //  إضافة الحقول النصية
+      Object.keys(formData).forEach((key) => {
+        if (
+          formData[key] !== "" &&
+          formData[key] !== null &&
+          formData[key] !== undefined
+        ) {
+          if (typeof formData[key] === "boolean") {
+            data.append(key, String(formData[key]));
+          } else {
+            data.append(key, formData[key]);
+          }
         }
+      });
+
+      //  إضافة tags
+      if (tags.length > 0) {
+        tags.forEach((tag) => data.append("tags", tag));
       }
-    });
 
-    // ✅ إضافة tags (مثل Edit.jsx)
-    if (tags.length > 0) {
-      tags.forEach((tag) => data.append("tags", tag));
-    }
+      // إضافة الصور مباشرة (بدون تغيير الأسماء)
+      images.forEach((image) => {
+        data.append("images", image);
+      });
 
-    // ✅ إضافة الصور (مثل Edit.jsx)
-    images.forEach((image) => {
-      data.append("images", image);
-    });
+      //  إرسال الطلب
+      await api.post("/products", data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
-    // ✅ سجل البيانات في Console
-    console.log("📦 FormData entries:");
-    for (let [key, value] of data.entries()) {
-      console.log(key, value);
-    }
+      toast.success("Product created successfully!");
+      setTimeout(() => {
+        navigate("/products");
+      }, 1500);
+    } catch (error) {
+      console.error("Create Product Error:", error);
 
-    // ✅ إرسال الطلب
-    const response = await api.post("/products", data);
-
-    console.log("✅ Response:", response.data);
-
-    toast.success("Product created successfully!");
-    setTimeout(() => {
-      navigate("/products");
-    }, 1500);
-  } catch (error) {
-    console.error("❌ Create Product Error:", error);
-    console.error("❌ Error response:", error.response?.data);
-    
-    // ✅ عرض رسائل الخطأ بشكل أفضل
-    if (error.response?.data?.errors) {
-      const errs = error.response.data.errors;
-      if (Array.isArray(errs) && errs.length > 0) {
-        toast.error(errs.join(", "));
-      } else if (typeof errs === "string") {
-        toast.error(errs);
+      if (error.response?.data?.errors) {
+        const errs = error.response.data.errors;
+        if (Array.isArray(errs) && errs.length > 0) {
+          toast.error(errs.join(", "));
+        } else if (typeof errs === "string") {
+          toast.error(errs);
+        } else {
+          toast.error(JSON.stringify(errs));
+        }
       } else {
-        toast.error(JSON.stringify(errs));
+        toast.error(
+          error.response?.data?.message || "Failed to create product",
+        );
       }
-    } else if (error.response?.data?.message) {
-      toast.error(error.response.data.message);
-    } else {
-      toast.error("Failed to create product. Please try again.");
+    } finally {
+      setLoading(false);
     }
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   if (showSkeleton) {
     const skeletonBaseColor = isDarkMode ? "#1e293b" : "#e2e8f0";
