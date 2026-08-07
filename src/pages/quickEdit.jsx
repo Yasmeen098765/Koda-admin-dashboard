@@ -624,88 +624,85 @@ export default function QuickEdit({
     }
   };
 
-  const handleSave = async (e) => {
-    if (e) e.preventDefault();
+ const handleSave = async (e) => {
+  if (e) e.preventDefault();
 
-    // ✅ فحص: تأكد من وجود product._id
-    if (!product?._id) {
-      console.error("❌ Product ID is missing:", product);
-      return toast.error("Product ID is missing. Please refresh and try again.");
-    }
+  // ✅ فحص: تأكد من وجود product._id
+  if (!product?._id) {
+    console.error("❌ Product ID is missing:", product);
+    return toast.error("Product ID is missing. Please refresh and try again.");
+  }
 
-    if (imagePreviews.length === 0) {
-      return toast.error("Please ensure there is at least one image.");
-    }
+  if (imagePreviews.length === 0) {
+    return toast.error("Please ensure there is at least one image.");
+  }
 
-    setLoading(true);
+  setLoading(true);
 
-    try {
-      const data = new FormData();
-      
-      // ✅ إضافة بيانات المنتج (تجاهل الحقول الفارغة)
-      Object.keys(product).forEach((key) => {
-        const value = product[key];
-        if (key !== "_id" && value !== "" && value !== null && value !== undefined) {
-          // ✅ تحويل القيم المنطقية إلى string
-          if (typeof value === 'boolean') {
-            data.append(key, String(value));
-          } else {
-            data.append(key, value);
-          }
-        }
-      });
-
-      // ✅ التأكد من أن tags هي مصفوفة
-      const safeTags = Array.isArray(tags) ? tags : [];
-      if (safeTags.length > 0) {
-        safeTags.forEach((tag) => data.append("tags", tag));
-      }
-
-      // ✅ التأكد من أن newImages هي مصفوفة
-      const safeNewImages = Array.isArray(newImages) ? newImages : [];
-      safeNewImages.forEach((image) => {
-        data.append("images", image);
-      });
-
-      // ✅ التأكد من أن deletedImages هي مصفوفة
-      const safeDeletedImages = Array.isArray(deletedImages) ? deletedImages : [];
-      if (safeDeletedImages.length > 0) {
-        data.append("deletedImages", JSON.stringify(safeDeletedImages));
-      }
-
-      console.log("📦 FormData entries:");
-      for (let [key, value] of data.entries()) {
-        console.log(key, value);
-      }
-
-      const response = await api.patch(`/products/update/${product._id}`, data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      toast.success("Product updated successfully!");
-      onSuccess();
-    } catch (err) {
-      console.error("❌ Update Error:", err);
-      console.error("❌ Error details:", err.response?.data);
-      
-      if (err.response?.data?.errors) {
-        const errs = err.response.data.errors;
-        if (Array.isArray(errs) && errs.length > 0) {
-          toast.error(errs.join(", "));
-        } else if (typeof errs === "string") {
-          toast.error(errs);
+  try {
+    const data = new FormData();
+    
+    // ✅ إضافة بيانات المنتج (تجاهل الحقول الفارغة)
+    Object.keys(product).forEach((key) => {
+      const value = product[key];
+      if (key !== "_id" && value !== "" && value !== null && value !== undefined) {
+        if (typeof value === 'boolean') {
+          data.append(key, String(value));
         } else {
-          toast.error(JSON.stringify(errs));
+          data.append(key, value);
         }
-      } else {
-        toast.error(err.response?.data?.message || "Failed to update product");
       }
-    } finally {
-      setLoading(false);
+    });
+
+    // ✅ إضافة tags
+    const safeTags = Array.isArray(tags) ? tags : [];
+    if (safeTags.length > 0) {
+      safeTags.forEach((tag) => data.append("tags", tag));
     }
-  };
+
+    // ✅ إضافة الصور الجديدة
+    const safeNewImages = Array.isArray(newImages) ? newImages : [];
+    safeNewImages.forEach((image) => {
+      data.append("images", image);
+    });
+
+    // ✅ ✅ الحل: إرسال deletedImages دائماً (حتى لو كانت فارغة)
+    const safeDeletedImages = Array.isArray(deletedImages) ? deletedImages : [];
+    data.append("deletedImages", JSON.stringify(safeDeletedImages));
+
+    console.log("📦 FormData entries:");
+    for (let [key, value] of data.entries()) {
+      console.log(key, value);
+    }
+
+    const response = await api.patch(`/products/update/${product._id}`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    toast.success("Product updated successfully!");
+    onSuccess();
+  } catch (err) {
+    console.error("❌ Update Error:", err);
+    console.error("❌ Error details:", err.response?.data);
+    
+    if (err.response?.data?.errors) {
+      const errs = err.response.data.errors;
+      if (Array.isArray(errs) && errs.length > 0) {
+        toast.error(errs.join(", "));
+      } else if (typeof errs === "string") {
+        toast.error(errs);
+      } else {
+        toast.error(JSON.stringify(errs));
+      }
+    } else {
+      toast.error(err.response?.data?.message || "Failed to update product");
+    }
+  } finally {
+    setLoading(false);
+  }
+};
 
   const categories = [
     "Electronics",
