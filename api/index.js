@@ -55,15 +55,32 @@
 //   }
 // }
 
+import multer from 'multer';
 
-
-import Busboy from 'busboy';
-import { Blob } from 'buffer';
+// ✅ إعداد multer للتخزين في الذاكرة
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10MB
+  },
+});
 
 export const config = {
   api: {
     bodyParser: false,
   },
+};
+
+// ✅ تحويل multer إلى middleware
+const runMiddleware = (req, res, fn) => {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result) => {
+      if (result instanceof Error) {
+        return reject(result);
+      }
+      return resolve(result);
+    });
+  });
 };
 
 export default async function handler(req, res) {
@@ -89,42 +106,31 @@ export default async function handler(req, res) {
     };
 
     if (contentType.includes('multipart/form-data')) {
-      // ✅ استخدام busboy لمعالجة FormData
+      // ✅ استخدام multer لمعالجة FormData
+      await runMiddleware(req, res, upload.any());
+
       const formData = new FormData();
       
-      await new Promise((resolve, reject) => {
-        const busboy = Busboy({ headers: req.headers });
-        
-        // معالجة الحقول النصية
-        busboy.on('field', (fieldname, value) => {
-          formData.append(fieldname, value);
-        });
-        
-        // معالجة الملفات
-        busboy.on('file', (fieldname, file, info) => {
-          const { filename, mimeType } = info;
-          const chunks = [];
-          file.on('data', (chunk) => {
-            chunks.push(chunk);
-          });
-          file.on('end', () => {
-            const buffer = Buffer.concat(chunks);
-            // ✅ تحويل Buffer إلى Blob
-            const blob = new Blob([buffer], { type: mimeType || 'application/octet-stream' });
-            formData.append(fieldname, blob, filename);
-          });
-        });
-        
-        busboy.on('error', (err) => {
-          reject(err);
-        });
-        
-        busboy.on('finish', () => {
-          resolve();
-        });
-        
-        req.pipe(busboy);
+      // ✅ إضافة الحقول النصية
+      Object.keys(req.body).forEach(key => {
+        const value = req.body[key];
+        if (Array.isArray(value)) {
+          value.forEach(v => formData.append(key, v));
+        } else {
+          formData.append(key, value);
+        }
       });
+
+      // ✅ إضافة الملفات
+      if (req.files && req.files.length > 0) {
+        req.files.forEach(file => {
+          // ✅ تحويل Buffer إلى Blob
+          const blob = new Blob([file.buffer], { 
+            type: file.mimetype || 'application/octet-stream' 
+          });
+          formData.append(file.fieldname, blob, file.originalname);
+        });
+      }
 
       body = formData;
     } else {
