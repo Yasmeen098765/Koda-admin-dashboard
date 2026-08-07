@@ -20,10 +20,10 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import api from "../api/api";
-import QuickEdit from "./quickEdit";
 import { ProductsSkeleton } from "../components/Skeleton/ProductsSkeleton/ProductsSkeleton.jsx";
 import useTheme from "../components/customHook/useTheme";
 import { useLanguage } from "../Context/LanguageContext";
+import QuickEdit from "./QuickEdit.jsx";
 
 const categories = [
   "Electronics",
