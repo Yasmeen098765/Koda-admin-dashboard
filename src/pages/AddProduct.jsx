@@ -106,73 +106,77 @@ export default function AddProduct() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (images.length === 0) {
-      toast.error("Please upload at least one image.");
-      return;
-    }
+  e.preventDefault();
+  if (images.length === 0) {
+    toast.error("Please upload at least one image.");
+    return;
+  }
 
-    setLoading(true);
-    try {
-      const data = new FormData();
+  setLoading(true);
+  try {
+    const data = new FormData();
 
-      //  إضافة الحقول النصية
-      Object.keys(formData).forEach((key) => {
-        if (
-          formData[key] !== "" &&
-          formData[key] !== null &&
-          formData[key] !== undefined
-        ) {
-          if (typeof formData[key] === "boolean") {
-            data.append(key, String(formData[key]));
-          } else {
-            data.append(key, formData[key]);
-          }
-        }
-      });
-
-      //  إضافة tags
-     if (tags.length > 0) {
-      data.append("tags", JSON.stringify(tags));
-    }
-
-      // إضافة الصور مباشرة (بدون تغيير الأسماء)
-      images.forEach((image) => {
-        data.append("images", image);
-      });
-
-      //  إرسال الطلب
-      await api.post("/products", data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-
-      toast.success("Product created successfully!");
-      setTimeout(() => {
-        navigate("/products");
-      }, 1500);
-    } catch (error) {
-      console.error("Create Product Error:", error);
-
-      if (error.response?.data?.errors) {
-        const errs = error.response.data.errors;
-        if (Array.isArray(errs) && errs.length > 0) {
-          toast.error(errs.join(", "));
-        } else if (typeof errs === "string") {
-          toast.error(errs);
+    // إضافة الحقول النصية
+    Object.keys(formData).forEach((key) => {
+      if (
+        formData[key] !== "" &&
+        formData[key] !== null &&
+        formData[key] !== undefined
+      ) {
+        if (typeof formData[key] === "boolean") {
+          data.append(key, String(formData[key]));
         } else {
-          toast.error(JSON.stringify(errs));
+          data.append(key, formData[key]);
         }
-      } else {
-        toast.error(
-          error.response?.data?.message || "Failed to create product",
-        );
       }
-    } finally {
-      setLoading(false);
+    });
+
+    // ✅ إضافة tags (حل وسط)
+    if (tags.length === 1) {
+      // tag واحد: أرسل كـ JSON string
+      data.append("tags", JSON.stringify(tags));
+    } else if (tags.length > 1) {
+      // tags متعددة: أرسل كـ FormData
+      tags.forEach((tag) => data.append("tags", tag));
     }
-  };
+
+    // إضافة الصور مباشرة
+    images.forEach((image) => {
+      data.append("images", image);
+    });
+
+    // إرسال الطلب
+    await api.post("/products", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
+    toast.success("Product created successfully!");
+    setTimeout(() => {
+      navigate("/products");
+    }, 1500);
+  } catch (error) {
+    console.error("Create Product Error:", error);
+
+    if (error.response?.data?.errors) {
+      const errs = error.response.data.errors;
+      if (Array.isArray(errs) && errs.length > 0) {
+        toast.error(errs.join(", "));
+      } else if (typeof errs === "string") {
+        toast.error(errs);
+      } else {
+        toast.error(JSON.stringify(errs));
+      }
+    } else {
+      toast.error(
+        error.response?.data?.message || "Failed to create product",
+      );
+    }
+  } finally {
+    setLoading(false);
+  }
+};
 
   if (showSkeleton) {
     const skeletonBaseColor = isDarkMode ? "#1e293b" : "#e2e8f0";
