@@ -131,8 +131,8 @@ export default function AddProduct() {
       }
     });
 
-    // ✅ إضافة tags (حل وسط)
-    if (tags.length === 1) {
+    //  إضافة tags (حل وسط)
+   if (tags.length === 1) {
       // tag واحد: أرسل كـ JSON string
       data.append("tags", JSON.stringify(tags));
     } else if (tags.length > 1) {
