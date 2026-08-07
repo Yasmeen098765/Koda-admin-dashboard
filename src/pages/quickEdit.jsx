@@ -624,7 +624,7 @@ export default function QuickEdit({
     }
   };
 
- const handleSave = async (e) => {
+const handleSave = async (e) => {
   if (e) e.preventDefault();
 
   // ✅ فحص: تأكد من وجود product._id
@@ -666,14 +666,18 @@ export default function QuickEdit({
       data.append("images", image);
     });
 
-    // ✅ ✅ الحل: إرسال deletedImages دائماً (حتى لو كانت فارغة)
+    // ✅ ✅ الحل النهائي: إرسال deletedImages كـ string دائماً
     const safeDeletedImages = Array.isArray(deletedImages) ? deletedImages : [];
+    // إذا كانت المصفوفة فارغة، أرسل "[]" كـ string
     data.append("deletedImages", JSON.stringify(safeDeletedImages));
 
     console.log("📦 FormData entries:");
     for (let [key, value] of data.entries()) {
       console.log(key, value);
     }
+
+    // ✅ طباعة deletedImages بشكل منفصل للتأكد
+    console.log("🗑️ deletedImages being sent:", JSON.stringify(safeDeletedImages));
 
     const response = await api.patch(`/products/update/${product._id}`, data, {
       headers: {
