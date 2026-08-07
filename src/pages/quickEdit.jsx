@@ -641,40 +641,70 @@ const handleSave = async (e) => {
   setLoading(true);
 
   try {
+    // ✅ محاكاة Edit.jsx: جلب البيانات أولاً
+    const fetchResponse = await api.get(`/products/${product._id}`);
+    const freshProduct = fetchResponse.data?.product || fetchResponse.data?.data || fetchResponse.data;
+    
+    console.log("🔄 Fresh product data:", freshProduct);
+
+    // ✅ استخدام البيانات الطازجة
     const data = new FormData();
     
-    Object.keys(product).forEach((key) => {
-      const value = product[key];
-      if (key !== "_id" && value !== "" && value !== null && value !== undefined) {
-        if (typeof value === 'boolean') {
-          data.append(key, String(value));
+    // إضافة الحقول الأساسية (مثل Edit.jsx)
+    const fields = {
+      name: product.name || freshProduct.name,
+      shortDescription: product.shortDescription || freshProduct.shortDescription,
+      description: product.description || freshProduct.description,
+      price: product.price || freshProduct.price,
+      discountPrice: product.discountPrice || freshProduct.discountPrice,
+      stock: product.stock || freshProduct.stock,
+      sku: product.sku || freshProduct.sku,
+      category: product.category || freshProduct.category,
+      subcategory: product.subcategory || freshProduct.subcategory,
+      brand: product.brand || freshProduct.brand,
+      featured: product.featured !== undefined ? product.featured : freshProduct.featured,
+      isActive: product.isActive !== undefined ? product.isActive : freshProduct.isActive,
+    };
+
+    Object.keys(fields).forEach((key) => {
+      if (fields[key] !== "" && fields[key] !== null && fields[key] !== undefined) {
+        if (typeof fields[key] === 'boolean') {
+          data.append(key, String(fields[key]));
         } else {
-          data.append(key, value);
+          data.append(key, fields[key]);
         }
       }
     });
 
-    const safeTags = Array.isArray(tags) ? tags : [];
+    // ✅ إضافة tags (مثل Edit.jsx)
+    const safeTags = Array.isArray(tags) && tags.length > 0 ? tags : (freshProduct.tags || []);
     if (safeTags.length > 0) {
-      safeTags.forEach((tag) => data.append("tags", tag));
+      if (safeTags.length === 1) {
+        data.append("tags", safeTags[0]);
+        data.append("tags", safeTags[0]);
+      } else {
+        safeTags.forEach((tag) => data.append("tags", tag));
+      }
     }
 
+    // ✅ إضافة الصور الجديدة (مثل Edit.jsx)
     const safeNewImages = Array.isArray(newImages) ? newImages : [];
     safeNewImages.forEach((image) => {
       data.append("images", image);
     });
 
-    // ✅ ✅ الحل النهائي: إرسال deletedImages دائماً (حتى لو كانت فارغة)
+    // ✅ إضافة deletedImages (مثل Edit.jsx)
     const safeDeletedImages = Array.isArray(deletedImages) ? deletedImages : [];
-    data.append("deletedImages", JSON.stringify(safeDeletedImages));
+    if (safeDeletedImages.length > 0) {
+      data.append("deletedImages", JSON.stringify(safeDeletedImages));
+    }
 
     console.log("📦 FormData entries:");
     for (let [key, value] of data.entries()) {
       console.log(key, value);
     }
 
-    console.log("🗑️ deletedImages being sent:", JSON.stringify(safeDeletedImages));
-
+    // ✅ إرسال الطلب (مثل Edit.jsx)
     const response = await api.patch(`/products/update/${product._id}`, data, {
       headers: {
         "Content-Type": "multipart/form-data",
