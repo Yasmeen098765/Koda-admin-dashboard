@@ -136,8 +136,10 @@ export default function AddProduct() {
 if (tags.length === 1) {
   // أرسل tag واحد مع "[]" لضمان أنه مصفوفة
   data.append("tags", `["${tags[0]}"]`);
+  console.log("1" , data)
 } else if (tags.length > 1) {
   tags.forEach((tag) => data.append("tags", tag));
+  console.log("2" , data)
 }
 
     // إضافة الصور مباشرة
