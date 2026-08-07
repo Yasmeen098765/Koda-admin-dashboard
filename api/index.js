@@ -57,8 +57,8 @@
 
 
 
-
 import Busboy from 'busboy';
+import { Blob } from 'buffer';
 
 export const config = {
   api: {
@@ -109,12 +109,9 @@ export default async function handler(req, res) {
           });
           file.on('end', () => {
             const buffer = Buffer.concat(chunks);
-            // ✅ في Node.js، استخدم Buffer مباشرة
-            // Blob لا يعمل في Vercel Serverless Functions
-            formData.append(fieldname, buffer, {
-              filename: filename,
-              contentType: mimeType || 'application/octet-stream',
-            });
+            // ✅ تحويل Buffer إلى Blob
+            const blob = new Blob([buffer], { type: mimeType || 'application/octet-stream' });
+            formData.append(fieldname, blob, filename);
           });
         });
         
