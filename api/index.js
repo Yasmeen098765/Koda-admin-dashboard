@@ -58,6 +58,9 @@
 import { IncomingForm } from 'formidable';
 import fs from 'fs';
 
+import { IncomingForm } from 'formidable';
+import { Readable } from 'stream';
+
 export const config = {
   api: {
     bodyParser: false,
@@ -113,19 +116,19 @@ export default async function handler(req, res) {
         }
       });
 
-      // ✅ إضافة الملفات بشكل صحيح
+      // ✅ تحويل الملفات إلى Blob بشكل صحيح
       Object.keys(files).forEach(key => {
         const file = files[key];
         if (Array.isArray(file)) {
           file.forEach(f => {
-            // ✅ قراءة الملف كـ Buffer
-            const fileBuffer = fs.readFileSync(f.filepath);
-            const blob = new Blob([fileBuffer], { type: f.mimetype });
+            // ✅ قراءة الملف وتحويله إلى Blob
+            const fileBuffer = require('fs').readFileSync(f.filepath);
+            const blob = new Blob([fileBuffer], { type: f.mimetype || 'application/octet-stream' });
             formData.append(key, blob, f.name);
           });
         } else if (file) {
-          const fileBuffer = fs.readFileSync(file.filepath);
-          const blob = new Blob([fileBuffer], { type: file.mimetype });
+          const fileBuffer = require('fs').readFileSync(file.filepath);
+          const blob = new Blob([fileBuffer], { type: file.mimetype || 'application/octet-stream' });
           formData.append(key, blob, file.name);
         }
       });
