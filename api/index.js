@@ -57,10 +57,7 @@
 
 
 
-
-
-import { IncomingForm } from 'formidable';
-import fs from 'fs';
+import Busboy from 'busboy';
 
 export const config = {
   api: {
@@ -91,48 +88,40 @@ export default async function handler(req, res) {
     };
 
     if (contentType.includes('multipart/form-data')) {
-      // ✅ معالجة FormData مع الملفات
-      const form = new IncomingForm({
-        multiples: true,
-        keepExtensions: true,
-      });
-
-      const { fields, files } = await new Promise((resolve, reject) => {
-        form.parse(req, (err, fields, files) => {
-          if (err) reject(err);
-          resolve({ fields, files });
-        });
-      });
-
-      // ✅ بناء FormData جديد
+      // ✅ استخدام busboy لمعالجة FormData
       const formData = new FormData();
       
-      // إضافة الحقول النصية
-      Object.keys(fields).forEach(key => {
-        const value = fields[key];
-        if (Array.isArray(value)) {
-          value.forEach(v => formData.append(key, v));
-        } else {
-          formData.append(key, value);
-        }
-      });
-
-      // ✅ تحويل الملفات إلى Blob بشكل صحيح
-      Object.keys(files).forEach(key => {
-        const file = files[key];
-        if (Array.isArray(file)) {
-          file.forEach(f => {
-            // ✅ استخدم fs مباشرة (لا حاجة لـ require)
-            const fileBuffer = fs.readFileSync(f.filepath);
-            const blob = new Blob([fileBuffer], { type: f.mimetype || 'application/octet-stream' });
-            formData.append(key, blob, f.name);
+      await new Promise((resolve, reject) => {
+        const busboy = Busboy({ headers: req.headers });
+        
+        // معالجة الحقول النصية
+        busboy.on('field', (fieldname, value) => {
+          formData.append(fieldname, value);
+        });
+        
+        // معالجة الملفات
+        busboy.on('file', (fieldname, file, info) => {
+          const { filename, mimeType } = info;
+          const chunks = [];
+          file.on('data', (chunk) => {
+            chunks.push(chunk);
           });
-        } else if (file) {
-          // ✅ استخدم fs مباشرة (لا حاجة لـ require)
-          const fileBuffer = fs.readFileSync(file.filepath);
-          const blob = new Blob([fileBuffer], { type: file.mimetype || 'application/octet-stream' });
-          formData.append(key, blob, file.name);
-        }
+          file.on('end', () => {
+            const buffer = Buffer.concat(chunks);
+            const blob = new Blob([buffer], { type: mimeType || 'application/octet-stream' });
+            formData.append(fieldname, blob, filename);
+          });
+        });
+        
+        busboy.on('error', (err) => {
+          reject(err);
+        });
+        
+        busboy.on('finish', () => {
+          resolve();
+        });
+        
+        req.pipe(busboy);
       });
 
       body = formData;
