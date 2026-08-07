@@ -132,14 +132,8 @@ export default function AddProduct() {
       });
 
       //  إضافة tags
-      if (tags.length > 0) {
-      if (tags.length === 1) {
-        //  إذا كان tag واحد، أرسله مرتين لضمان أنه مصفوفة
-        data.append("tags", tags[0]);
-        data.append("tags", tags[0]);
-      } else {
-        tags.forEach((tag) => data.append("tags", tag));
-      }
+     if (tags.length > 0) {
+      data.append("tags", JSON.stringify(tags));
     }
 
       // إضافة الصور مباشرة (بدون تغيير الأسماء)
