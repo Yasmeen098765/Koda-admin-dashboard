@@ -87,12 +87,15 @@ export default function AddProduct() {
   };
 
   const handleAddTag = () => {
-    const trimmed = tagInput.trim();
-    if (trimmed && !tags.includes(trimmed)) {
-      setTags((prev) => [...prev, trimmed]);
-      setTagInput("");
-    }
-  };
+  const trimmed = tagInput.trim();
+  if (trimmed && !tags.includes(trimmed)) {
+    const newTags = [...tags, trimmed];
+    console.log("📝 Added tag:", trimmed);
+    console.log("📝 New tags array:", newTags);
+    setTags(newTags);
+    setTagInput("");
+  }
+};
 
   const handleTagKeyDown = (e) => {
     if (e.key === "Enter") {
@@ -105,7 +108,7 @@ export default function AddProduct() {
     setTags((prev) => prev.filter((tag) => tag !== tagToRemove));
   };
 
-  const handleSubmit = async (e) => {
+ const handleSubmit = async (e) => {
   e.preventDefault();
   if (images.length === 0) {
     toast.error("Please upload at least one image.");
@@ -116,13 +119,9 @@ export default function AddProduct() {
   try {
     const data = new FormData();
 
-    // إضافة الحقول النصية
+    // ✅ إضافة الحقول النصية (مثل Edit.jsx)
     Object.keys(formData).forEach((key) => {
-      if (
-        formData[key] !== "" &&
-        formData[key] !== null &&
-        formData[key] !== undefined
-      ) {
+      if (formData[key] !== "" && formData[key] !== null && formData[key] !== undefined) {
         if (typeof formData[key] === "boolean") {
           data.append(key, String(formData[key]));
         } else {
@@ -131,36 +130,36 @@ export default function AddProduct() {
       }
     });
 
-   
-   //  إضافة tags مع ضمان مصفوفة في FormData
-if (tags.length === 1) {
-  // أرسل tag واحد مع "[]" لضمان أنه مصفوفة
-  data.append("tags[]", tags[0]);
-  console.log("1" , data)
-} else if (tags.length > 1) {
-   tags.forEach((tag) => data.append("tags[]", tag));
-  console.log("2" , data)
-}
+    // ✅ إضافة tags (مثل Edit.jsx)
+    if (tags.length > 0) {
+      tags.forEach((tag) => data.append("tags", tag));
+    }
 
-    // إضافة الصور مباشرة
+    // ✅ إضافة الصور (مثل Edit.jsx)
     images.forEach((image) => {
       data.append("images", image);
     });
 
-    // إرسال الطلب
-    await api.post("/products", data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    // ✅ سجل البيانات في Console
+    console.log("📦 FormData entries:");
+    for (let [key, value] of data.entries()) {
+      console.log(key, value);
+    }
+
+    // ✅ إرسال الطلب
+    const response = await api.post("/products", data);
+
+    console.log("✅ Response:", response.data);
 
     toast.success("Product created successfully!");
     setTimeout(() => {
       navigate("/products");
     }, 1500);
   } catch (error) {
-    console.error("Create Product Error:", error);
-
+    console.error("❌ Create Product Error:", error);
+    console.error("❌ Error response:", error.response?.data);
+    
+    // ✅ عرض رسائل الخطأ بشكل أفضل
     if (error.response?.data?.errors) {
       const errs = error.response.data.errors;
       if (Array.isArray(errs) && errs.length > 0) {
@@ -170,10 +169,10 @@ if (tags.length === 1) {
       } else {
         toast.error(JSON.stringify(errs));
       }
+    } else if (error.response?.data?.message) {
+      toast.error(error.response.data.message);
     } else {
-      toast.error(
-        error.response?.data?.message || "Failed to create product",
-      );
+      toast.error("Failed to create product. Please try again.");
     }
   } finally {
     setLoading(false);
